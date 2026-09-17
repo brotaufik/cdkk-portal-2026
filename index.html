@@ -86,6 +86,11 @@ a{color:inherit}
 h1{font-family:Cambria,Georgia,serif;font-size:clamp(32px,5.5vw,52px);font-weight:700;line-height:1.08;margin:14px 0 16px;letter-spacing:-.01em;color:var(--goldl);text-transform:uppercase}
 .lead{font-size:17px;color:#C6D6E6;max-width:620px;margin-bottom:28px}
 .meta-line{font-size:13.5px;color:#8FA5C2}
+.fact-strip{display:flex;flex-wrap:wrap;gap:1px;margin-top:26px;max-width:860px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.16)}
+.fact{flex:1 1 180px;padding:14px 18px;background:#0F2338}
+.fact-val{font-family:Cambria,Georgia,serif;font-size:21px;font-weight:700;color:var(--goldl);line-height:1.15}
+.fact-lbl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#8FA5C2;margin-top:5px}
+@media (max-width:560px){.fact{flex:1 1 100%}}
 
 /* ===== Hero right cluster (theme switch + clock) ===== */
 .hero-right{display:flex;align-items:center;gap:18px;flex:none}
@@ -196,6 +201,12 @@ footer b{color:#fff}
     <h1>Portal CDKK 2026</h1>
     <p class="lead">Pusat rujukan rasmi Pertandingan Cabaran Digital Kreatif Komuniti (CDKK) KEMAS @FESMA Tahun 2026 — semua dokumen program dalam satu pautan.</p>
     <div class="meta-line">Program Train-of-Trainers (ToT) &nbsp;&middot;&nbsp; PKM Sungai Siput, Perak &nbsp;&middot;&nbsp; 26 hingga 28 Ogos 2026</div>
+    <div class="fact-strip">
+      <div class="fact"><div class="fact-val">8 jam</div><div class="fact-lbl">Tempoh sprint &middot; 480 minit</div></div>
+      <div class="fact"><div class="fact-val">232 &middot; 376 &middot; 432</div><div class="fact-lbl">Tiga hard stop wajib (minit)</div></div>
+      <div class="fact"><div class="fact-val">9 fasa</div><div class="fact-lbl">Pelan masa hari pertandingan</div></div>
+      <div class="fact"><div class="fact-val">5 minit</div><div class="fact-lbl">Durasi video maksimum</div></div>
+    </div>
   </div>
 </div>
 
@@ -255,7 +266,7 @@ footer b{color:#fff}
           <div class="tag">Dokumen Rasmi</div>
         </div>
       </div>
-      <p>Peraturan rasmi pertandingan — syarat penyertaan, spesifikasi teknikal wajib, rubrik penilaian dan tatacara pertandingan peringkat negeri dan kebangsaan.</p>
+      <p>Peraturan rasmi pertandingan — syarat penyertaan, tempoh penghasilan 8 jam (480 minit), spesifikasi teknikal wajib, rubrik penilaian dan tatacara pertandingan peringkat negeri dan kebangsaan.</p>
       <div class="card-actions">
         <a class="btn btn-primary" href="01_Garis_Panduan_CDKK.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -282,7 +293,7 @@ footer b{color:#fff}
           <div class="tag">Borang 1&ndash;7</div>
         </div>
       </div>
-      <p>Borang rasmi dan templat sokongan untuk pendaftaran, log prompt AI, storyboard, penilaian hakim dan pengesahan hari pertandingan — boleh difotostat.</p>
+      <p>Borang rasmi dan templat sokongan untuk pendaftaran, log prompt AI, storyboard, penilaian hakim dan pengesahan hari pertandingan — termasuk Templat 1: Pelan Masa 480 Minit yang boleh ditanda semasa sprint. Boleh difotostat.</p>
       <div class="card-actions">
         <a class="btn btn-primary" href="04_Borang_Pertandingan_CDKK.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -377,7 +388,7 @@ footer b{color:#fff}
 
 <footer>
   <b>Bahagian Pendidikan Kemahiran (BPKEM)</b> &middot; Jabatan Kemajuan Masyarakat (KEMAS) &middot; Kementerian Kemajuan Desa dan Wilayah (KKDW)<br>
-  Admin: Bro Taufik &middot; Dikemaskini Ogos 2026
+  Admin: Bro Taufik &middot; Dikemaskini September 2026
 </footer>
 
 <script>
