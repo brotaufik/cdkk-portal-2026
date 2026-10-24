@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('cdkk-theme');
+    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch(e) { document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Borang Festival CDKK 2026</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Borang Festival CDKK 2026">
+<meta property="og:description" content="Borang rasmi Pertandingan CDKK KEMAS @FESMA 2026 dalam fail berasingan: Borang 1 hingga 7, rujukan dan templat, DOCX dan PDF.">
+<meta property="og:image" content="https://brotaufik.github.io/cdkk-portal-2026/borang/pratonton.jpg">
+<meta property="og:url" content="https://brotaufik.github.io/cdkk-portal-2026/borang/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Borang Festival CDKK 2026">
+<meta name="twitter:image" content="https://brotaufik.github.io/cdkk-portal-2026/borang/pratonton.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+<style>
+:root{
+  /* brand constants */
+  --navy:#1F4E79;--navyd:#0F2338;--navym:#173A5C;--gold:#B8860B;--goldl:#D9A62B;--w:#fff;
+  /* light theme (default) */
+  --bg:#E9E1CC;
+  --ink:#2B2419;
+  --mute:#6E6148;
+  --heading:#1F4E79;
+  --card-top:#FDFBF4;
+  --card-bot:#EAE0C4;
+  --card-border:#D5C6A0;
+  --card-hi:rgba(255,255,255,.85);
+  --card-shadow:rgba(56,41,8,.22);
+  --plate-a:#FFF6DC;--plate-b:#EFC96E;--plate-c:#B8860B;--plate-d:#6E5006;
+  --plate-border:#8B6508;
+  --plate-ink:#1F4E79;
+  --plate-glow:rgba(184,134,11,0);
+  --btn-primary-top:#2E6094;--btn-primary-bot:#153A5C;
+  --btn-ghost-ink:#1F4E79;
+  --switch-sun:1;--switch-moon:.35;
+}
+:root[data-theme="dark"]{
+  --bg:#0A121C;
+  --ink:#DCE6F0;
+  --mute:#93A7BC;
+  --heading:#F0DDA6;
+  --card-top:#233A4E;
+  --card-bot:#111D2A;
+  --card-border:#31485E;
+  --card-hi:rgba(255,255,255,.14);
+  --card-shadow:rgba(0,0,0,.62);
+  --plate-a:#6B5323;--plate-b:#4A3712;--plate-c:#241B08;--plate-d:#120D04;
+  --plate-border:#0A0703;
+  --plate-ink:#FBE8B4;
+  --plate-glow:rgba(217,166,43,.4);
+  --btn-primary-top:#3E76AC;--btn-primary-bot:#1B3752;
+  --btn-ghost-ink:#DCE8F5;
+  --switch-sun:.35;--switch-moon:1;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]):not([data-theme="dark"]){
+    --bg:#0A121C;--ink:#DCE6F0;--mute:#93A7BC;--heading:#F0DDA6;
+    --card-top:#233A4E;--card-bot:#111D2A;--card-border:#31485E;
+    --card-hi:rgba(255,255,255,.14);--card-shadow:rgba(0,0,0,.62);
+    --plate-a:#6B5323;--plate-b:#4A3712;--plate-c:#241B08;--plate-d:#120D04;
+    --plate-border:#0A0703;--plate-ink:#FBE8B4;--plate-glow:rgba(217,166,43,.4);
+    --btn-primary-top:#3E76AC;--btn-primary-bot:#1B3752;--btn-ghost-ink:#DCE8F5;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);line-height:1.5;transition:background .3s ease,color .3s ease}
+a{color:inherit}
+
+/* ===== Hero ===== */
+.hero{background:var(--navyd);color:#fff;padding:56px 24px 64px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--goldl))}
+.hero-inner{max-width:980px;margin:0 auto;position:relative}
+.hero-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--goldl)}
+h1{font-family:Cambria,Georgia,serif;font-size:clamp(32px,5.5vw,52px);font-weight:700;line-height:1.08;margin:14px 0 16px;letter-spacing:-.01em;color:var(--goldl);text-transform:uppercase}
+.lead{font-size:17px;color:#C6D6E6;max-width:620px;margin-bottom:28px}
+.meta-line{font-size:13.5px;color:#8FA5C2}
+.fact-strip{display:flex;flex-wrap:wrap;gap:1px;margin-top:26px;max-width:860px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.16)}
+.fact{flex:1 1 180px;padding:14px 18px;background:#0F2338}
+.fact-val{font-family:Cambria,Georgia,serif;font-size:21px;font-weight:700;color:var(--goldl);line-height:1.15}
+.fact-lbl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#8FA5C2;margin-top:5px}
+@media (max-width:560px){.fact{flex:1 1 100%}}
+
+/* ===== Hero right cluster (theme switch + clock) ===== */
+.hero-right{display:flex;align-items:center;gap:18px;flex:none}
+
+/* ===== Theme switch (skeuomorphic rocker) ===== */
+.switch-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none}
+.theme-switch{width:66px;height:34px;border-radius:17px;position:relative;cursor:pointer;border:1px solid #030A12;
+  background:linear-gradient(180deg,#0C1826,#182A3E);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.65),inset 0 -1px 0 rgba(255,255,255,.06),0 1px 0 rgba(255,255,255,.08);
+  padding:0;}
+.theme-switch .icon-sun,.theme-switch .icon-moon{position:absolute;top:50%;transform:translateY(-50%);width:14px;height:14px;transition:opacity .25s ease}
+.theme-switch .icon-sun{left:8px;opacity:var(--switch-sun);color:#E7C567}
+.theme-switch .icon-moon{right:8px;opacity:var(--switch-moon);color:#9FC2E8}
+.theme-knob{position:absolute;top:3px;left:4px;width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#FFF3D2,#E7C567 55%,#9C7418 100%);
+  box-shadow:0 2px 5px rgba(0,0,0,.55),inset 0 1px 1px rgba(255,255,255,.8),inset 0 -2px 3px rgba(120,85,10,.5);
+  transition:left .25s cubic-bezier(.4,0,.2,1)}
+:root[data-theme="dark"] .theme-knob{left:36px}
+.switch-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8FA5C2}
+
+/* ===== Live clock badge ===== */
+.clock-badge{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  padding:8px 16px;
+  text-align:right;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);
+  flex:none;
+}
+.clock-time{font-family:'Share Tech Mono',ui-monospace,Menlo,monospace;font-size:24px;font-weight:700;color:#F2F7FC;letter-spacing:.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+.clock-date{font-family:'Share Tech Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6FE0C8;margin-top:2px}
+
+/* ===== Doc grid ===== */
+main{max-width:980px;margin:-28px auto 0;padding:0 24px 64px;position:relative}
+.section-label{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:40px 0 16px;transition:color .3s ease}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:22px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+
+.card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--card-top),var(--card-bot));
+  border:1px solid var(--card-border);
+  border-radius:16px;padding:26px 26px 24px;
+  box-shadow:0 12px 24px var(--card-shadow),0 2px 5px rgba(0,0,0,.12),inset 0 -10px 18px rgba(0,0,0,.05);
+  display:flex;flex-direction:column;
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.card::before{content:"";position:absolute;top:0;left:14px;right:14px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--card-hi),transparent)}
+.card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+.card-icon{
+  flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 120% at 30% 22%,var(--plate-a) 0%,var(--plate-b) 45%,var(--plate-c) 80%,var(--plate-d) 100%);
+  border:1px solid var(--plate-border);color:var(--plate-ink);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.7),inset 0 -3px 4px rgba(0,0,0,.35),0 2px 4px rgba(0,0,0,.25),0 0 10px var(--plate-glow);
+  transition:box-shadow .3s ease;
+}
+.card-icon.photo{padding:0;overflow:hidden}
+.card-icon.photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:10px;display:block}
+.card h2{font-family:Cambria,Georgia,serif;font-size:20px;color:var(--heading);font-weight:700;line-height:1.25;transition:color .3s ease}
+.card .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--goldl);margin-top:3px}
+.card p{font-size:14.5px;color:var(--mute);margin-bottom:20px;flex:1;transition:color .3s ease}
+.card-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:700;padding:10px 18px;border-radius:9px;text-decoration:none;transition:transform .08s ease,box-shadow .15s ease}
+.btn-primary{
+  color:#fff;border:1px solid rgba(0,0,0,.3);
+  background:linear-gradient(180deg,var(--btn-primary-top),var(--btn-primary-bot));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 3px rgba(0,0,0,.3),0 3px 6px rgba(0,0,0,.28);
+}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-primary:active{transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.4)}
+.btn-ghost{
+  color:var(--btn-ghost-ink);border:1px solid var(--card-border);
+  background:linear-gradient(180deg,var(--card-top),var(--card-bot));
+  box-shadow:inset 0 1px 0 var(--card-hi),inset 0 -1px 2px rgba(0,0,0,.1),0 2px 4px rgba(0,0,0,.15);
+}
+.btn-ghost:hover{filter:brightness(1.03)}
+.btn-ghost:active{transform:translateY(1px);box-shadow:inset 0 2px 3px rgba(0,0,0,.2)}
+.btn svg{width:15px;height:15px;flex:none}
+
+footer{background:var(--navyd);color:#8FA5C2;padding:28px 24px;text-align:center;font-size:13px}
+footer b{color:#fff}
+
+/* ===== Borang Festival (borang/index.html, Pusingan 43) ===== */
+.back{display:inline-flex;align-items:center;gap:6px;color:#C6D6E6;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:12px}
+.back:hover{color:#fff}
+.back svg{width:14px;height:14px}
+.pak{flex-direction:row;align-items:center;gap:26px}
+.pak-img{width:52%;flex:none;border-radius:12px;border:1px solid var(--card-border);display:block}
+.pak h2{margin-bottom:8px}
+.pak .card-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pak .btn{justify-content:center}
+.flist{display:grid;grid-auto-rows:minmax(92px,auto);gap:12px}
+.frow{display:grid;grid-template-columns:58px minmax(0,1fr) auto;align-items:center;gap:16px;padding:0 18px;border-radius:14px;overflow:hidden;
+  border:1px solid var(--card-border);background:linear-gradient(180deg,var(--card-top),var(--card-bot));
+  box-shadow:0 6px 14px var(--card-shadow),inset 0 1px 0 var(--card-hi)}
+.fkod{height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:Cambria,Georgia,serif;font-weight:700;font-size:19px;
+  color:var(--plate-ink);border:1px solid var(--plate-border);
+  background:radial-gradient(120% 120% at 30% 22%,var(--plate-a) 0%,var(--plate-b) 45%,var(--plate-c) 80%,var(--plate-d) 100%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.7),inset 0 -3px 4px rgba(0,0,0,.35)}
+.ftajuk{min-width:0}
+.ftajuk h3{font-family:Cambria,Georgia,serif;font-size:17px;font-weight:700;color:var(--heading);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ftajuk div{font-size:13px;line-height:1.45;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ftajuk h3+div{margin-top:3px}
+.ftajuk b{font-weight:700;color:var(--ink)}
+.fbtn{display:grid;grid-template-columns:repeat(3,104px);gap:8px}
+.fbtn .btn{justify-content:center;padding:9px 6px;font-size:13px}
+@media (max-width:960px){
+  .pak{flex-direction:column;align-items:stretch}
+  .pak-img{width:100%}
+  .flist{grid-auto-rows:auto}
+  .frow{grid-template-columns:50px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;align-items:start;padding:14px;row-gap:12px}
+  .fkod{height:44px;font-size:17px}
+  .ftajuk h3,.ftajuk div{white-space:normal;text-overflow:clip}
+  .fbtn{grid-column:1 / -1;align-self:end;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-head">
+      <div class="eyebrow">BPKEM HQ &middot; Jabatan Kemajuan Masyarakat</div>
+      <div class="hero-right">
+        <div class="switch-wrap">
+          <button class="theme-switch" id="themeSwitch" type="button" aria-label="Tukar mod dark / light">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+            <span class="theme-knob"></span>
+          </button>
+          <span class="switch-label" id="themeLabel">Light</span>
+        </div>
+        <div class="clock-badge">
+          <div class="clock-time" id="clockTime">--:--:--</div>
+          <div class="clock-date" id="clockDate">--- &middot; -- --- ----</div>
+        </div>
+      </div>
+    </div>
+    <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Portal CDKK 2026</a>
+    <h1>Borang Festival CDKK 2026</h1>
+    <p class="lead">Setiap borang pertandingan dalam fail sendiri, dengan reka bentuk festival filem. Kandungan sama dengan Borang Pertandingan CDKK (04). Isi terus dalam Word atau cetak PDF.</p>
+    <div class="meta-line">Hari Kemahiran KEMAS Peringkat Kebangsaan &nbsp;&middot;&nbsp; 7 dan 8 November 2026</div>
+    <div class="fact-strip">
+      <div class="fact"><div class="fact-val">15</div><div class="fact-lbl">Borang, rujukan dan templat</div></div>
+      <div class="fact"><div class="fact-val">30 fail</div><div class="fact-lbl">DOCX dan PDF</div></div>
+      <div class="fact"><div class="fact-val">101</div><div class="fact-lbl">Kotak semak boleh diklik</div></div>
+      <div class="fact"><div class="fact-val">Selaras</div><div class="fact-lbl">Dengan 04 &middot; Pusingan 42</div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="section-label">Set lengkap</div>
+  <div class="card pak">
+    <img class="pak-img" src="pratonton.jpg" alt="Muka pertama Borang 1, 3, 5, 6 dan 7" width="1408" height="404">
+    <div>
+      <h2>15 borang dalam satu ZIP</h2>
+      <p>30 fail: DOCX untuk diisi dalam Word dengan kotak semak yang boleh diklik, dan PDF untuk dicetak. Rujuk Jadual 1 dalam Indeks Borang untuk mengetahui siapa mengisi borang mana dan bila.</p>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="Borang_Festival_CDKK_2026.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Muat turun ZIP</a>
+        <a class="btn btn-ghost" href="00_Indeks_Borang.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Indeks Borang</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Borang pertandingan</div>
+  <div class="flist">
+    <div class="frow">
+      <div class="fkod">1</div>
+      <div class="ftajuk"><h3>Borang Penyertaan</h3><div><b>Diisi oleh:</b> Peserta dan pengurus pasukan</div><div><b>Bila:</b> Semasa pendaftaran rasmi dibuka &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_1_Penyertaan.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_1_Penyertaan.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_1_Penyertaan.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">2</div>
+      <div class="ftajuk"><h3>Log Prompt dan Sumber Aset</h3><div><b>Diisi oleh:</b> Kedua-dua peserta</div><div><b>Bila:</b> Sepanjang 480 minit produksi &middot; 5 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_2_Log_Prompt_dan_Sumber_Aset.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_2_Log_Prompt_dan_Sumber_Aset.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_2_Log_Prompt_dan_Sumber_Aset.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">3</div>
+      <div class="ftajuk"><h3>Storyboard</h3><div><b>Diisi oleh:</b> Kedua-dua peserta</div><div><b>Bila:</b> Fasa perancangan, sebelum aset dibina &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_3_Storyboard.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_3_Storyboard.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_3_Storyboard.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">4A</div>
+      <div class="ftajuk"><h3>Pengesahan Data Usahawan</h3><div><b>Diisi oleh:</b> Kedua-dua peserta dan subjek pengesah</div><div><b>Bila:</b> Semasa temu bual pada hari pertandingan &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_4A_Pengesahan_Data_Usahawan.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_4A_Pengesahan_Data_Usahawan.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_4A_Pengesahan_Data_Usahawan.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">4B</div>
+      <div class="ftajuk"><h3>Pengesahan Data Alpha Gen Talents</h3><div><b>Diisi oleh:</b> Kedua-dua peserta dan subjek pengesah</div><div><b>Bila:</b> Semasa temu bual pada hari pertandingan &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_4B_Pengesahan_Data_Alpha_Gen_Talents.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_4B_Pengesahan_Data_Alpha_Gen_Talents.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_4B_Pengesahan_Data_Alpha_Gen_Talents.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">4C</div>
+      <div class="ftajuk"><h3>Pengesahan Data Pameran Dan Demonstrasi</h3><div><b>Diisi oleh:</b> Kedua-dua peserta dan subjek pengesah</div><div><b>Bila:</b> Semasa temu bual pada hari pertandingan &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_4C_Pengesahan_Data_Pameran_dan_Demonstrasi.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_4C_Pengesahan_Data_Pameran_dan_Demonstrasi.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_4C_Pengesahan_Data_Pameran_dan_Demonstrasi.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">5</div>
+      <div class="ftajuk"><h3>Penilaian Hakim</h3><div><b>Diisi oleh:</b> Setiap ahli panel hakim</div><div><b>Bila:</b> Semasa sesi persembahan &middot; 3 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_5_Penilaian_Hakim.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_5_Penilaian_Hakim.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_5_Penilaian_Hakim.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">6</div>
+      <div class="ftajuk"><h3>Penilaian Juri Awam</h3><div><b>Diisi oleh:</b> Setiap juri awam</div><div><b>Bila:</b> Semasa tayangan finalis &middot; 2 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_6_Penilaian_Juri_Awam.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_6_Penilaian_Juri_Awam.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_6_Penilaian_Juri_Awam.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">7</div>
+      <div class="ftajuk"><h3>Brand Kit Pasukan</h3><div><b>Diisi oleh:</b> Kedua-dua peserta</div><div><b>Bila:</b> Semasa pendaftaran, sebelum hari pertandingan &middot; 4 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Borang_7_Brand_Kit_Pasukan.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Borang_7_Brand_Kit_Pasukan.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Borang_7_Brand_Kit_Pasukan.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Rujukan, templat dan indeks</div>
+  <div class="flist">
+    <div class="frow">
+      <div class="fkod">R1</div>
+      <div class="ftajuk"><h3>Julat Markah dan Keputusan Seri</h3><div><b>Diisi oleh:</b> Rujukan panel hakim</div><div><b>Bila:</b> Semasa mengisi Borang 5 &middot; 2 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Rujukan_1_Julat_Markah_dan_Keputusan_Seri.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Rujukan_1_Julat_Markah_dan_Keputusan_Seri.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Rujukan_1_Julat_Markah_dan_Keputusan_Seri.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">R2</div>
+      <div class="ftajuk"><h3>Senarai Semak Penyerahan</h3><div><b>Diisi oleh:</b> Urus setia</div><div><b>Bila:</b> Semasa menerima penyerahan &middot; 2 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Rujukan_2_Senarai_Semak_Penyerahan.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Rujukan_2_Senarai_Semak_Penyerahan.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Rujukan_2_Senarai_Semak_Penyerahan.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">T1</div>
+      <div class="ftajuk"><h3>Pelan Masa 480 Minit</h3><div><b>Diisi oleh:</b> Peserta</div><div><b>Bila:</b> Ditanda sepanjang sprint &middot; 1 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Templat_1_Pelan_Masa_480_Minit.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Templat_1_Pelan_Masa_480_Minit.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Templat_1_Pelan_Masa_480_Minit.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">T2</div>
+      <div class="ftajuk"><h3>Senarai Semak Akhir Sembilan Titik</h3><div><b>Diisi oleh:</b> Peserta</div><div><b>Bila:</b> Semakan akhir video sebelum penyerahan &middot; 1 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Templat_2_Senarai_Semak_Akhir_Sembilan_Titik.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Templat_2_Senarai_Semak_Akhir_Sembilan_Titik.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Templat_2_Senarai_Semak_Akhir_Sembilan_Titik.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">T3</div>
+      <div class="ftajuk"><h3>Senarai Semak Elemen Wajib</h3><div><b>Diisi oleh:</b> Peserta</div><div><b>Bila:</b> Semakan elemen wajib dalam video &middot; 1 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="Templat_3_Senarai_Semak_Elemen_Wajib.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="Templat_3_Senarai_Semak_Elemen_Wajib.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="Templat_3_Senarai_Semak_Elemen_Wajib.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fkod">i</div>
+      <div class="ftajuk"><h3>Indeks Borang</h3><div><b>Diisi oleh:</b> Semua</div><div><b>Bila:</b> Jadual 1: siapa mengisi borang mana dan bila &middot; 2 muka</div></div>
+      <div class="fbtn">
+        <a class="btn btn-primary" href="00_Indeks_Borang.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Lihat</a>
+        <a class="btn btn-ghost" href="00_Indeks_Borang.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn btn-ghost" href="00_Indeks_Borang.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>DOCX</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>Bahagian Pendidikan Kemahiran (BPKEM)</b> &middot; Jabatan Kemajuan Masyarakat (KEMAS) &middot; Kementerian Kemajuan Desa dan Wilayah (KKDW)<br>
+  Admin: Bro Taufik &middot; Dikemaskini Oktober 2026
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('themeSwitch');
+  var label = document.getElementById('themeLabel');
+  function sync(){
+    var t = root.getAttribute('data-theme') || 'light';
+    label.textContent = t === 'dark' ? 'Dark' : 'Light';
+    btn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+  }
+  sync();
+  btn.addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('cdkk-theme', next); } catch(e){}
+    sync();
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var timeEl = document.getElementById('clockTime');
+  var dateEl = document.getElementById('clockDate');
+  var days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var now = new Date();
+    timeEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    dateEl.textContent = days[now.getDay()] + ' · ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+/* Semua baris borang sama tinggi pada setiap lebar skrin (ikut baris paling tinggi). */
+(function(){
+  function sama(){
+    var rows = document.querySelectorAll('.frow'), maks = 0, i;
+    for (i = 0; i < rows.length; i++) rows[i].style.height = 'auto';
+    for (i = 0; i < rows.length; i++) maks = Math.max(maks, rows[i].getBoundingClientRect().height);
+    for (i = 0; i < rows.length; i++) rows[i].style.height = Math.ceil(maks) + 'px';
+  }
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(sama, 80); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sama);
+  sama();
+})();
+</script>
+</body>
+</html>
