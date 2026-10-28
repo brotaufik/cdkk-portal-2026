@@ -23,7 +23,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
 <style>
 [hidden]{display:none !important}
-/* v5.9.12 (28 Okt 2026, arahan Bro): slaid taklimat Urusetia Kehakiman (31 slaid, 60 minit, nota penyampai) sebagai item pertama seksyen DOKUMEN, di atas Garis Panduan CDKK.
+/* v5.9.16 (28 Okt 2026, arahan Bro): slaid taklimat, semua kad dan kotak berfill warna penuh (gradient pepejal), teks cerah pada fill gelap; kad Urusetia Kehakiman emas dengan garisan gelap lebih tebal. Kaki Kod v5.9.16.
+   v5.9.15 (28 Okt 2026, arahan Bro): tab BORANG MANUAL di rail, di bawah seksyen Konsol Kehakiman. Tiga kad sama saiz (Borang Hakim, Borang Juri Awam, Rumusan Urusetia): Buat salinan dan Lihat borang
+   (Google Sheet), pautan daripada pelayan selepas PIN (Code.gs BORANG_MANUAL_ID_). Jadual pindah markah ke Rumusan. Kaki Kod v5.9.15.
+   v5.9.12 (28 Okt 2026, arahan Bro): slaid taklimat Urusetia Kehakiman (31 slaid, 60 minit, nota penyampai) sebagai item pertama seksyen DOKUMEN, di atas Garis Panduan CDKK.
    Butang Back, Home (menu semua slaid) dan Next; kekunci anak panah, Home, End, N (nota), F (skrin penuh); pemasa taklimat; senario klik untuk jawapan. Kaki Kod v5.9.12.
    v5.9.11 (28 Okt 2026, arahan Bro): (1) PIN urusetia DAN PIN Admin disimpan pada peranti selepas dimasukkan sekali dan kekal selepas muat semula; kunci Konsol Admin
    30 minit tanpa aktiviti dibuang. Butang Kunci menjadi LOCK: memadam PIN tersimpan dan meminta PIN semula. (2) JUDGEMENT ialah seksyen rail sendiri di bawah BATTLEGROUND
@@ -771,6 +774,29 @@ html[data-theme="light"] .tkkembali{color:#fff}
 #tkSt .tktlr.rp .tktlw{min-height:30px;font-size:16px}
 #tkSt .tktlr.rp .tktlb{padding:6px 10px;font-size:18px}
 #tkSt .tktlr.rp .tktll{font-size:20px}
+/* v5.9.15: Borang Manual. Tiga kad berkongsi baris grid (subgrid) supaya tajuk, setiap baris maklumat dan butang sejajar tepat. */
+#borangPanel .bmgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(9,auto);column-gap:14px;row-gap:0;margin-top:14px}
+.bmk{grid-row:span 9;display:grid;grid-template-rows:subgrid;row-gap:0;min-width:0;background:var(--panel2);border:1px solid var(--line);border-top:4px solid var(--bmc,var(--gold));border-radius:10px;padding:16px 16px 14px}
+.bmk .bmeb{font-family:var(--f-cond);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bmc,var(--gold2))}
+.bmk h3{margin:4px 0 2px;font-family:var(--f-cond);font-size:1.3rem;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--ink)}
+.bmk .bmsub{margin:0 0 12px;font-size:.8rem;line-height:1.4;color:var(--muted)}
+.bmk .bmr{display:flex;flex-direction:column;gap:3px;padding:9px 0;border-top:1px solid var(--line);min-width:0}
+.bmk .bmr b{font-family:var(--f-cond);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bmc,var(--gold2))}
+.bmk .bmr span{font-size:.82rem;line-height:1.4;color:var(--ink2)}
+.bmk .bmst{display:flex;align-items:center;gap:8px;padding:10px 0 0;border-top:1px solid var(--line);font-family:var(--f-cond);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
+.bmk .bmst i{width:8px;height:8px;border-radius:50%;background:var(--warn);flex:none}
+.bmk .bmst.sedia{color:var(--good)} .bmk .bmst.sedia i{background:var(--good)}
+.bmk .bmaksi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-top:10px}
+.bmk .bmaksi .lk{justify-content:center;margin-top:0;min-height:42px;white-space:nowrap}
+.bmk:nth-child(1){--bmc:#00B4D8} .bmk:nth-child(2){--bmc:#E040A0} .bmk:nth-child(3){--bmc:#F2B705}
+@media(max-width:1320px){.bmk .bmaksi{grid-template-columns:minmax(0,1fr)}}   /* kad sempit: dua butang disusun menegak, lebar penuh dan sama */
+@media(max-width:980px){#borangPanel .bmgrid{grid-template-columns:minmax(0,1fr);grid-template-rows:none;row-gap:14px}.bmk{grid-row:auto}}
+#borangPanel .bmtab{margin-top:18px}
+#borangPanel .bmtab h3{margin:0 0 8px;font-family:var(--f-cond);font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2)}
+#borangPanel .bmtab table{width:100%;border-collapse:collapse;table-layout:fixed}
+#borangPanel .bmtab th,#borangPanel .bmtab td{padding:9px 12px;border:1px solid var(--line);font-size:.82rem;line-height:1.4;text-align:left;vertical-align:top;color:var(--ink2)}
+#borangPanel .bmtab th{background:var(--raised);font-family:var(--f-cond);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+#borangPanel .bmtab td b{color:var(--ink)}
 /* v5.9.14: slaid warna-warni (palet logo CDKK), satu warna aksen setiap bahagian, kad, jadual, bar, garis masa dan rajah berwarna. Gelap dan cerah. */
 #tkSt{--p0:#22D3EE;--p1:#F43F9D;--p2:#F3D64E;--p3:#A78BFA;--p4:#FB923C;--p5:#34D399;--p6:#60A5FA;--p7:#E879F9;--p8:#A3E635;--on:#0B0F16}
 html[data-theme="light"] #tkSt{--p0:#0891B2;--p1:#C0126F;--p2:#8A6A00;--p3:#6D3FC0;--p4:#C2540A;--p5:#0F7A55;--p6:#1D4ED8;--p7:#A21CAF;--p8:#4D7C0F;--on:#fff}
@@ -979,6 +1005,54 @@ html[data-theme="light"] #tkSt .tkc.hl .tkp{color:#fff}
 .kd.batal{color:var(--bad)}
 .rank-n{font-family:var(--f-cond);font-size:.66rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* v5.9.16: kad dan kotak slaid berfill warna penuh. Kedua-dua mod: fill gelap berwarna + teks putih (mod gelap: fill lebih malap, garisan lebih terang). Panel carta: fill gelap beraksen + teks putih. Urusetia Kehakiman: emas, garisan gelap tebal. */
+#tkSt{--fm:#000;--fp1:52%;--fp2:36%;--bp:88%}
+html[data-theme="light"] #tkSt{--fp1:88%;--fp2:62%;--bp:52%}
+#tkSt#tkSt .tkc,#tkSt#tkSt .tkc.dk,#tkSt#tkSt .tkc.hl,#tkSt#tkSt .tkc.tkok,#tkSt#tkSt .tkc.tkbd,#tkSt#tkSt .tkcol{background:linear-gradient(135deg,color-mix(in srgb,var(--c) var(--fp1),var(--fm)),color-mix(in srgb,var(--c) var(--fp2),var(--fm)));border:3px solid color-mix(in srgb,var(--c) var(--bp),#000);color:#fff}
+#tkSt#tkSt .tkcol{border-top-width:6px}
+#tkSt#tkSt .tkc :is(.tkh,.tkn,.tkp,.tkl,.tkr,.tkr b,.tkp b,.tkl b,.tkx),#tkSt#tkSt .tkcol :is(.tkh,.tkp){color:#fff}
+#tkSt#tkSt .tkc .tkl li::marker{color:#fff}
+#tkSt#tkSt .tkc .tkic,#tkSt#tkSt .tkcol .tkic{border-color:#fff;background:color-mix(in srgb,#fff 16%,transparent)}
+#tkSt#tkSt .tkc .tkic svg,#tkSt#tkSt .tkcol .tkic svg{stroke:#fff}
+#tkSt#tkSt .tkc .tkn.nb{border-color:#fff;color:#fff;background:color-mix(in srgb,#fff 14%,transparent)}
+#tkSt#tkSt .tkc .tkpl{background:#fff;color:color-mix(in srgb,var(--c) 55%,#000)}
+#tkSt#tkSt .tkc.go:hover,#tkSt#tkSt .tkc.go:focus-visible{filter:brightness(1.1);border-color:color-mix(in srgb,var(--c) var(--bp),#000)}
+#tkSt#tkSt .tkjw:not(.buka):after{background:#fff;color:color-mix(in srgb,var(--c) 55%,#000);border-color:var(--c)}
+/* banner */
+#tkSt#tkSt .tkbn{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) var(--fp1),var(--fm)),color-mix(in srgb,var(--ac) var(--fp2),var(--fm)));border:3px solid color-mix(in srgb,var(--ac) var(--bp),#000);color:#fff}
+#tkSt#tkSt .tkbn b,#tkSt#tkSt .tkbn.lt b{color:#fff}
+#tkSt#tkSt .tkbn.lt{--ac:var(--warn)}
+/* label lapisan dan label garis masa */
+#tkSt#tkSt .tkly>span,#tkSt#tkSt .tktll{background:linear-gradient(135deg,color-mix(in srgb,var(--lc) var(--fp1),var(--fm)),color-mix(in srgb,var(--lc) var(--fp2),var(--fm)));border:3px solid color-mix(in srgb,var(--lc) var(--bp),#000);color:#fff}
+/* garis masa */
+#tkSt#tkSt .tktlb{background:linear-gradient(135deg,color-mix(in srgb,var(--lc) var(--fp1),var(--fm)),color-mix(in srgb,var(--lc) var(--fp2),var(--fm)));border:3px solid color-mix(in srgb,var(--lc) var(--bp),#000);color:#fff}
+#tkSt#tkSt .tktln.hl .tktlb{color:#fff;font-weight:700;box-shadow:0 0 0 4px color-mix(in srgb,var(--lc) 38%,transparent)}
+/* jadual: pengepala berfill */
+#tkSt#tkSt .tkt2 th{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) var(--fp1),var(--fm)),color-mix(in srgb,var(--ac) var(--fp2),var(--fm)));color:#fff;border-bottom-color:color-mix(in srgb,var(--ac) var(--bp),#000)}
+/* segmen dan skala */
+#tkSt#tkSt .tksg.c0,#tkSt#tkSt .tkskb i.sky{--c:var(--p0)} #tkSt#tkSt .tksg.c1{--c:var(--p1)} #tkSt#tkSt .tksg.c2{--c:var(--p2)} #tkSt#tkSt .tksg.c3{--c:var(--p3)} #tkSt#tkSt .tksg.c4,#tkSt#tkSt .tkskb i.warn{--c:var(--p4)} #tkSt#tkSt .tksg.c5{--c:var(--p5)}
+#tkSt#tkSt .tksg,#tkSt#tkSt .tkskb i{background:linear-gradient(135deg,color-mix(in srgb,var(--c) var(--fp1),var(--fm)),color-mix(in srgb,var(--c) var(--fp2),var(--fm)));color:#fff}
+/* kulit dan penutup */
+#tkSt#tkSt .tkcov .tkpill span:nth-child(1){--c:var(--p0)} #tkSt#tkSt .tkcov .tkpill span:nth-child(2){--c:var(--p1)} #tkSt#tkSt .tkcov .tkpill span:nth-child(3){--c:var(--p2)}
+#tkSt#tkSt .tkcov .tkpill span{background:linear-gradient(135deg,color-mix(in srgb,var(--c) var(--fp1),var(--fm)),color-mix(in srgb,var(--c) var(--fp2),var(--fm)));border:2px solid color-mix(in srgb,var(--c) var(--bp),#000);color:#fff}
+#tkSt#tkSt .tkcirc{--c:var(--p3);background:linear-gradient(135deg,color-mix(in srgb,var(--c) var(--fp1),var(--fm)),color-mix(in srgb,var(--c) var(--fp2),var(--fm)));border:4px solid color-mix(in srgb,var(--c) var(--bp),#000);color:#fff}
+/* panel carta (bar, donat, ringkasan markah): fill gelap beraksen, palet cerah di dalamnya, teks putih */
+#tkSt#tkSt .tkbar2,#tkSt#tkSt .tkdonw,#tkSt#tkSt .tkc.tkbs{--p0:#22D3EE;--p1:#F43F9D;--p2:#F3D64E;--p3:#A78BFA;--p4:#FB923C;--p5:#34D399;--p6:#60A5FA;--p7:#E879F9;--p8:#A3E635;background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 16%,#0B1224),color-mix(in srgb,var(--ac) 8%,#060A14));border:3px solid color-mix(in srgb,var(--ac) 55%,#000);color:#fff}
+#tkSt#tkSt .tkbar2 .tkh,#tkSt#tkSt .tkc.tkbs .tkh{color:#F3D64E}
+#tkSt#tkSt .tkc.tkbs .tkp,#tkSt#tkSt .tkc.tkbs .tkn{color:rgba(255,255,255,.92)}
+#tkSt#tkSt .tkbar2 .tktr,#tkSt#tkSt .tkdonw .tktr{background:rgba(255,255,255,.16)}
+#tkSt#tkSt .tkdonw .tkdon text,#tkSt#tkSt .tkc.tkbs .tkdon text{fill:#fff}
+#tkSt#tkSt .tkdonw .tkdon .t2,#tkSt#tkSt .tkc.tkbs .tkdon .t2{fill:rgba(255,255,255,.85)}
+#tkSt#tkSt .tkdonw .tkdon path,#tkSt#tkSt .tkc.tkbs .tkdon path{stroke:#0B1224}
+#tkSt#tkSt .tkdonw .tkdon circle.bg,#tkSt#tkSt .tkc.tkbs .tkdon circle.bg{stroke:rgba(255,255,255,.16)}
+#tkSt#tkSt .tkdon-l{color:#fff} #tkSt#tkSt .tkdon-l b{color:#fff}
+html[data-theme="light"] #tkSt#tkSt .tkbar2,html[data-theme="light"] #tkSt#tkSt .tkdonw,html[data-theme="light"] #tkSt#tkSt .tkc.tkbs{background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 26%,#0B1224),color-mix(in srgb,var(--ac) 13%,#060A14));border-color:color-mix(in srgb,var(--ac) 55%,#000)}
+/* Urusetia Kehakiman: emas, garisan gelap lebih tebal daripada semua kad lain */
+#tkSt#tkSt .tkc.us{--c:#F0B90B;background:linear-gradient(135deg,#FFE27A,#F0B90B 55%,#D79A00);border:9px solid #2B1D00;color:#1A1200}
+#tkSt#tkSt .tkc.us :is(.tkh,.tkn,.tkp,.tkl,.tkr,.tkr b,.tkp b,.tkx){color:#1A1200}
+#tkSt#tkSt .tkc.us .tkic{border-color:#2B1D00;background:rgba(43,29,0,.10)}
+#tkSt#tkSt .tkc.us .tkic svg{stroke:#2B1D00}
+html:not([data-theme="light"]) #tkSt#tkSt .tkc.us{border-color:#5A3F00}
 /* ---- halaman bebas ---- */
 html,body{background:var(--bg,#0B0F16)}
 body{margin:0;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -1049,7 +1123,7 @@ var TK = [
    {k:'lapis', i:[
      {l:'ADMIN', ar:'PIN dan laporan status aset', c:[{ic:'key',h:'Admin (1)',p:'Pemilik sistem: keluar PIN, hantar laporan status aset'}]},
      {l:'PENILAI', ar:'markah hakim dan skor juri masuk sistem', c:[{ic:'scale',h:'Ketua Hakim H1',p:'Sahkan sebelum Serah'},{ic:'scale',h:'Panel Hakim H2, H3',p:'Markah 9 komponen, penalti'},{ic:'users',h:'Juri awam (25)',p:'Skor 3 aspek, kad QR'}]},
-     {l:'ANDA', ar:'keputusan disahkan dan diserahkan', c:[{t:'hl',ic:'shield',h:'Urusetia Kehakiman (2)',p:'Urus sesi, semak, sahkan dan serah keputusan'}]},
+     {l:'ANDA', ar:'keputusan disahkan dan diserahkan', c:[{t:'us',ic:'shield',h:'Urusetia Kehakiman (2)',p:'Urus sesi, semak, sahkan dan serah keputusan'}]},
      {l:'PENERIMA', c:[{ic:'file',h:'Jawatankuasa Induk',p:'Menerima laporan keputusan yang diserahkan'}]}]}]},
  {id:'garismasa', q:1, s:'Garis masa acara', e:'Garis masa', t:'Garis masa acara', b:[
    {k:'banner', h:'Tempat taklimat Jumaat:', p:'Dewan CDKK, Aras 2, Dewan Konvokesyen UIS. Setiap pasukan: 20 minit termasuk soal jawab.'},
@@ -1197,7 +1271,7 @@ var TK_DN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l
 function tkIc(n){ return TK_IC[n] ? '<span class="tkic"><svg viewBox="0 0 24 24" aria-hidden="true">' + TK_IC[n] + '</svg></span>' : ''; }
 function tkKad(it, o){
   o = o || {};
-  var cls = 'tkc' + (it.go ? ' go' : '') + (it.t === 'dk' ? ' dk' : '') + (it.t === 'hl' ? ' hl' : '') + (it.t === 'ok' ? ' tkok' : '') + (it.t === 'bd' ? ' tkbd' : '') + (o.rw ? ' rw' : '') + (o.ls ? ' ls' : '');
+  var cls = 'tkc' + (it.go ? ' go' : '') + (it.t === 'dk' ? ' dk' : '') + (it.t === 'hl' ? ' hl' : '') + (it.t === 'us' ? ' us' : '') + (it.t === 'ok' ? ' tkok' : '') + (it.t === 'bd' ? ' tkbd' : '') + (o.rw ? ' rw' : '') + (o.ls ? ' ls' : '');
   var h = '<' + (it.go ? 'button type="button"' : 'div') + ' class="' + cls + '"' + (it.go ? ' data-go="' + tkE(it.go) + '"' : '') + '>';
   var tx = '';
   if(it.pl) tx += '<div class="tkpl">' + tkF(it.pl) + '</div>';
