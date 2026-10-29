@@ -90,7 +90,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 .rk.in .t i { background: var(--accent); }
 .rk .v { font-family: var(--f-display); font-size: 24px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
 .cut { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-top: 2px dashed var(--muted); padding-top: 6px; }
-.voters { columns: 2 160px; column-gap: 20px; font-size: 14px; }
+.voters { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 96px; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-weight: 600; z-index: 9; max-width: calc(100% - 32px); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -110,8 +110,16 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 
   <main id="vUndi" style="display:flex;flex-direction:column;gap:20px">
     <div class="field">
-      <label class="lbl" for="nama">Nama anda</label>
-      <input type="text" id="nama" autocomplete="name" placeholder="Contoh: Siti, PKM Kuching" maxlength="60">
+      <label class="lbl" for="nama">Nama Penuh</label>
+      <input type="text" id="nama" autocomplete="name" placeholder="Contoh: Siti binti Ahmad" maxlength="80">
+    </div>
+    <div class="field">
+      <label class="lbl" for="jawatan">Jawatan</label>
+      <input type="text" id="jawatan" autocomplete="organization-title" placeholder="Contoh: Pegawai Kemajuan Masyarakat" maxlength="80">
+    </div>
+    <div class="field">
+      <label class="lbl" for="tempat">Tempat Bertugas</label>
+      <input type="text" id="tempat" autocomplete="organization" placeholder="Contoh: PKM Kuching" maxlength="80">
     </div>
     <div id="senarai" style="display:flex;flex-direction:column;gap:24px"></div>
 
@@ -130,8 +138,8 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   <main id="vPengira" hidden style="display:flex;flex-direction:column;gap:20px">
     <div class="panel">
       <h2>Tampal mesej undi</h2>
-      <p class="note">Tampal semua mesej WhatsApp sekali gus. Nama yang sama dikira sekali sahaja, mesej terakhir menang. Mesej yang tak cukup 14 pilihan ditolak.</p>
-      <textarea id="tampal" aria-label="Mesej undi daripada WhatsApp" placeholder="UNDI BLACKBOX CDKK&#10;Nama: ...&#10;Pilihan (14): 1, 2, 3, ..."></textarea>
+      <p class="note">Tampal semua mesej WhatsApp sekali gus. Nama dan tempat bertugas yang sama dikira sekali sahaja, mesej terakhir menang. Mesej yang tak cukup 14 pilihan ditolak.</p>
+      <textarea id="tampal" aria-label="Mesej undi daripada WhatsApp" placeholder="UNDI BLACKBOX CDKK&#10;Nama Penuh: ...&#10;Jawatan: ...&#10;Tempat Bertugas: ...&#10;Pilihan (14): 1, 2, 3, ..."></textarea>
       <div class="row">
         <button class="btn" id="kira" type="button">Kira undi</button>
         <button class="btn sec" id="kosong" type="button">Kosongkan</button>
@@ -189,8 +197,8 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function jumlah() { return Object.keys(pilih).length; }
   function toast(t) { var x = $('toast'); x.textContent = t; x.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(function () { x.hidden = true; }, 2200); }
-  function simpan() { try { localStorage.setItem('undi-bb', JSON.stringify({ nama: $('nama').value, pilih: Object.keys(pilih) })); } catch (e) {} }
-  function muat() { try { var d = JSON.parse(localStorage.getItem('undi-bb') || 'null'); if (d) { $('nama').value = d.nama || ''; (d.pilih || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 24) pilih[n] = true; }); } } catch (e) {} }
+  function simpan() { try { localStorage.setItem('undi-bb', JSON.stringify({ nama: $('nama').value, jawatan: $('jawatan').value, tempat: $('tempat').value, pilih: Object.keys(pilih) })); } catch (e) {} }
+  function muat() { try { var d = JSON.parse(localStorage.getItem('undi-bb') || 'null'); if (d) { $('nama').value = d.nama || ''; $('jawatan').value = d.jawatan || ''; $('tempat').value = d.tempat || ''; (d.pilih || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 24) pilih[n] = true; }); } } catch (e) {} }
 
   var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5"/></svg>';
   function bina() {
@@ -231,13 +239,13 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     });
     $('count').innerHTML = j + '<small> / ' + MAKS + '</small>';
     $('prog').style.width = (j / MAKS * 100) + '%';
-    var nama = $('nama').value.trim();
-    $('progM').textContent = penuh ? (nama ? 'Sedia dihantar' : 'Isi nama anda di atas') : 'Pilih ' + (MAKS - j) + ' lagi';
-    $('hantar').disabled = !(penuh && nama);
+    var lengkap = $('nama').value.trim() && $('jawatan').value.trim() && $('tempat').value.trim();
+    $('progM').textContent = penuh ? (lengkap ? 'Sedia dihantar' : 'Isi nama, jawatan dan tempat bertugas') : 'Pilih ' + (MAKS - j) + ' lagi';
+    $('hantar').disabled = !(penuh && lengkap);
   }
   function teks() {
     var no = Object.keys(pilih).map(Number).sort(function (a, b) { return a - b; });
-    return 'UNDI BLACKBOX CDKK\nNama: ' + $('nama').value.trim() + '\nPilihan (' + no.length + '): ' + no.join(', ');
+    return 'UNDI BLACKBOX CDKK\nNama Penuh: ' + $('nama').value.trim() + '\nJawatan: ' + $('jawatan').value.trim() + '\nTempat Bertugas: ' + $('tempat').value.trim() + '\nPilihan (' + no.length + '): ' + no.join(', ');
   }
   function hantar() {
     var t = teks(); $('msg').textContent = t;
@@ -255,7 +263,9 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     var bahagian = txt.split(/(?=UNDI\s+BLACKBOX)/i).filter(function (b) { return b.trim(); });
     var oleh = {}, urut = [], ralat = [];
     bahagian.forEach(function (b, idx) {
-      var m = b.match(/Nama\s*:\s*(.+)/i); var nama = m ? m[1].trim() : '';
+      var m = b.match(/Nama(?:\s+Penuh)?\s*:\s*(.+)/i); var nama = m ? m[1].trim() : '';
+      var mj = b.match(/Jawatan\s*:\s*(.*)/i); var jawatan = mj ? mj[1].trim() : '';
+      var mt = b.match(/Tempat\s+Bertugas\s*:\s*(.*)/i); var tempat = mt ? mt[1].trim() : '';
       var p = b.match(/Pilihan[^:\n]*:\s*([0-9][0-9,\s]*)/i);
       var label = nama || ('Tanpa nama ' + (idx + 1));
       if (!p) { ralat.push(label + ': baris Pilihan tidak dijumpai'); return; }
@@ -264,9 +274,9 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
       if (uniq.length !== no.length) { ralat.push(label + ': ada nombor berulang'); return; }
       if (uniq.some(function (v) { return v < 1 || v > 24; })) { ralat.push(label + ': ada nombor di luar 1 hingga 24'); return; }
       if (uniq.length !== MAKS) { ralat.push(label + ': ' + uniq.length + ' pilihan, perlu ' + MAKS); return; }
-      var kunci = label.toLowerCase();
+      var kunci = label.toLowerCase() + '|' + tempat.toLowerCase();
       if (!(kunci in oleh)) urut.push(kunci);
-      oleh[kunci] = { nama: label, no: uniq };
+      oleh[kunci] = { nama: label, jawatan: jawatan, tempat: tempat, no: uniq };
     });
     return { pengundi: urut.map(function (k) { return oleh[k]; }), ralat: ralat };
   }
@@ -340,7 +350,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     rw.appendChild(bs); pt.appendChild(rw); out.appendChild(pt);
 
     var pv = el('div', 'panel'); pv.appendChild(el('h2', '', 'Senarai pengundi'));
-    var v = el('div', 'voters'); h.pengundi.forEach(function (p) { v.appendChild(el('p', '', p.nama)); }); pv.appendChild(v); out.appendChild(pv);
+    var v = el('div', 'voters'); h.pengundi.forEach(function (p) { v.appendChild(el('p', '', [p.nama, p.jawatan, p.tempat].filter(Boolean).join(' · '))); }); pv.appendChild(v); out.appendChild(pv);
   }
 
   /* ---------- Paparan ---------- */
@@ -354,7 +364,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 
   bina(); muat(); segar(); paparan();
   window.addEventListener('hashchange', paparan);
-  $('nama').addEventListener('input', function () { segar(); simpan(); });
+  ['nama', 'jawatan', 'tempat'].forEach(function (k) { $(k).addEventListener('input', function () { segar(); simpan(); }); });
   $('hantar').addEventListener('click', hantar);
   $('salin').addEventListener('click', function () { salin(teks()); });
   $('ubah').addEventListener('click', function () { $('hasil').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
