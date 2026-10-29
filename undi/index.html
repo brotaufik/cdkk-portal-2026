@@ -121,18 +121,59 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 .voters { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 96px; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-weight: 600; z-index: 9; max-width: calc(100% - 32px); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Banner utama */
+.hero { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: 26px 22px 22px 24px; border-radius: 18px; color: #F4F7FD;
+  background:
+    linear-gradient(90deg, #22D3EE 0 25%, #FF3EB5 25% 50%, #FFC62B 50% 75%, #A06BFF 75% 100%) top / 100% 5px no-repeat,
+    radial-gradient(120% 140% at 100% 50%, rgba(160,107,255,.30), transparent 55%),
+    radial-gradient(90% 120% at 0% 0%, rgba(34,211,238,.16), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 22px),
+    linear-gradient(135deg, #0A1330, #101D45);
+  box-shadow: 0 10px 28px rgba(10,19,48,.28), inset 0 0 0 1px rgba(255,255,255,.08); }
+.hero-txt { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; flex: 1; }
+.hero-kicker { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #FFC62B; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.hero-kicker i { width: 5px; height: 5px; border-radius: 50%; background: #FF3EB5; display: inline-block; }
+.hero h1 { color: #FFFFFF; font-size: clamp(34px, 9vw, 52px); line-height: .95; font-weight: 800; text-wrap: balance; }
+.hero h1 span { background: linear-gradient(90deg, #22D3EE, #A06BFF 55%, #FF3EB5); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-lead { margin: 0; color: #C9D4EA; font-size: 15px; max-width: 46ch; }
+.hero-chips { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-chips li { font-size: 13px; color: #DCE5F7; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 4px 12px; }
+.hero-chips b { color: #FFC62B; font-weight: 800; margin-right: 2px; }
+.hero-logo { position: relative; z-index: 1; flex: none; width: 148px; height: 148px; padding: 4px; border-radius: 50%;
+  background: conic-gradient(from 210deg, #22D3EE, #A06BFF, #FF3EB5, #FFC62B, #22D3EE);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.05), 0 0 34px rgba(160,107,255,.55), 0 0 60px rgba(34,211,238,.25); }
+.hero-logo img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #000; }
+@media (max-width: 560px) {
+  .hero { padding: 22px 16px 18px 18px; gap: 12px; align-items: flex-start; }
+  .hero-logo { width: 100px; height: 100px; padding: 3px; margin-top: 2px; }
+  .hero-lead { font-size: 14px; }
+  .hero-chips { gap: 6px; }
+  .hero-chips li { font-size: 12px; padding: 3px 9px; }
+}
+@media (max-width: 380px) { .hero-logo { width: 78px; height: 78px; } .hero-chips li { font-size: 11.5px; padding: 3px 8px; } }
 </style>
 
 </head>
 <body>
 <div class="wrap">
-  <header style="display:flex;flex-direction:column;gap:10px">
-    <p class="kicker">CDKK @FESMA 2026 · Sabtu 7 November</p>
-    <h1>Undi Tajuk Blackbox</h1>
-    <p class="lead">Pilih tepat 14 daripada 33 tajuk FESMA untuk dijadikan subjek cabutan Blackbox. Setiap orang satu undi. Keputusan akhir ditentukan penyelaras.</p>
+  <header style="display:flex;flex-direction:column;gap:14px">
+    <section class="hero" aria-label="Undi Tajuk Blackbox">
+      <div class="hero-txt">
+        <p class="hero-kicker">CDKK @FESMA 2026 <i aria-hidden="true"></i> Sabtu 7 November</p>
+        <h1>Undi Tajuk <span>Blackbox</span></h1>
+        <p class="hero-lead">Pilih tepat 14 daripada 33 tajuk FESMA untuk dijadikan subjek cabutan Blackbox. Setiap orang satu undi. Keputusan akhir ditentukan penyelaras.</p>
+        <ul class="hero-chips" aria-label="Ringkasan">
+          <li><b>14</b> pilihan</li><li><b>33</b> tajuk</li><li><b>1</b> undi seorang</li>
+        </ul>
+      </div>
+      <div class="hero-logo"><img src="logo-cdkk.jpg" width="180" height="180" alt="Logo CDKK Digital Creative Community, KEMAS @ FESMA 2026"></div>
+    </section>
     <nav class="tabs" aria-label="Paparan">
       <a href="#undi" id="tabUndi">Undi saya</a>
-      <a href="#pengira" id="tabPengira">Pengira</a>
+      <a href="#pengira" id="tabPengira">Counter</a>
     </nav>
   </header>
 
@@ -173,12 +214,12 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 
   <main id="vPengira" hidden style="display:flex;flex-direction:column;gap:20px">
     <div class="panel">
-      <h2>Tampal mesej undi</h2>
-      <p class="note">Tampal semua mesej WhatsApp sekali gus. Nama dan tempat bertugas yang sama dikira sekali sahaja, mesej terakhir menang. Mesej yang tak cukup 14 pilihan ditolak.</p>
-      <textarea id="tampal" aria-label="Mesej undi daripada WhatsApp" placeholder="UNDI BLACKBOX CDKK&#10;Nama Penuh: ...&#10;Jawatan: ...&#10;Tempat Bertugas: ...&#10;Pilihan (14): 1, 2, 3, ..."></textarea>
+      <h2>Paste vote messages</h2>
+      <p class="note">Paste all WhatsApp messages at once. The same name and workplace is counted once, and the latest message wins. Messages without exactly 14 choices are rejected.</p>
+      <textarea id="tampal" aria-label="Vote messages from WhatsApp" placeholder="UNDI BLACKBOX CDKK&#10;Nama Penuh: ...&#10;Jawatan: ...&#10;Tempat Bertugas: ...&#10;Pilihan (14): 1, 2, 3, ..."></textarea>
       <div class="row">
-        <button class="btn" id="kira" type="button">Kira undi</button>
-        <button class="btn sec" id="kosong" type="button">Kosongkan</button>
+        <button class="btn" id="kira" type="button">Count votes</button>
+        <button class="btn sec" id="kosong" type="button">Clear</button>
       </div>
     </div>
     <div id="keputusan" style="display:flex;flex-direction:column;gap:16px"></div>
@@ -354,13 +395,13 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
       var mj = b.match(/Jawatan\s*:\s*(.*)/i); var jawatan = mj ? mj[1].trim() : '';
       var mt = b.match(/Tempat\s+Bertugas\s*:\s*(.*)/i); var tempat = mt ? mt[1].trim() : '';
       var p = b.match(/Pilihan[^:\n]*:\s*([0-9][0-9,\s]*)/i);
-      var label = nama || ('Tanpa nama ' + (idx + 1));
-      if (!p) { ralat.push(label + ': baris Pilihan tidak dijumpai'); return; }
+      var label = nama || ('No name ' + (idx + 1));
+      if (!p) { ralat.push(label + ': Pilihan line not found'); return; }
       var no = p[1].split(/[\s,]+/).filter(Boolean).map(Number);
       var uniq = no.filter(function (v, i) { return no.indexOf(v) === i; });
-      if (uniq.length !== no.length) { ralat.push(label + ': ada nombor berulang'); return; }
-      if (uniq.some(function (v) { return v < 1 || v > BIL; })) { ralat.push(label + ': ada nombor di luar 1 hingga ' + BIL + ''); return; }
-      if (uniq.length !== MAKS) { ralat.push(label + ': ' + uniq.length + ' pilihan, perlu ' + MAKS); return; }
+      if (uniq.length !== no.length) { ralat.push(label + ': duplicate numbers'); return; }
+      if (uniq.some(function (v) { return v < 1 || v > BIL; })) { ralat.push(label + ': numbers outside 1 to ' + BIL); return; }
+      if (uniq.length !== MAKS) { ralat.push(label + ': ' + uniq.length + ' choices, need ' + MAKS); return; }
       var kunci = label.toLowerCase() + '|' + tempat.toLowerCase();
       if (!(kunci in oleh)) urut.push(kunci);
       oleh[kunci] = { nama: label, jawatan: jawatan, tempat: tempat, no: uniq };
@@ -372,7 +413,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   }
   function paparHasil(h) {
     var out = $('keputusan'); out.textContent = '';
-    if (!h.pengundi.length && !h.ralat.length) { out.appendChild(el('p', 'note', 'Tiada mesej untuk dikira.')); return; }
+    if (!h.pengundi.length && !h.ralat.length) { out.appendChild(el('p', 'note', 'No messages to count.')); return; }
     var kira_ = {}; ITEMS.forEach(function (i) { kira_[i[0]] = 0; });
     h.pengundi.forEach(function (p) { p.no.forEach(function (n) { kira_[n]++; }); });
     var susun = ITEMS.slice().sort(function (a, b) { return kira_[b[0]] - kira_[a[0]] || a[0] - b[0]; });
@@ -387,15 +428,15 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     var masuk = {}; atas.forEach(function (i) { masuk[i[0]] = true; }); Object.keys(dipilihSeri).forEach(function (n) { masuk[n] = true; });
 
     var ring = el('div', 'panel');
-    ring.appendChild(el('h2', '', h.pengundi.length + ' pengundi sah'));
+    ring.appendChild(el('h2', '', h.pengundi.length + ' valid voters'));
     var st = el('p', 'note');
-    if (!h.pengundi.length) st.textContent = 'Tiada undi sah lagi.';
-    else if (perluCabut && !seriPilih) { st.className = 'err'; st.textContent = 'Seri pada undi ke-' + c14 + ': ' + seri.length + ' tajuk berebut ' + slot + ' tempat. Tekan Cabut seri atau putuskan sendiri.'; }
-    else if (perluCabut) { st.className = 'ok'; st.textContent = 'Seri sudah dicabut rawak. 14 tajuk muktamad.'; }
-    else { st.className = 'ok'; st.textContent = 'Tiada seri. 14 tajuk muktamad.'; }
+    if (!h.pengundi.length) st.textContent = 'No valid votes yet.';
+    else if (perluCabut && !seriPilih) { st.className = 'err'; st.textContent = 'Tie at ' + c14 + ' votes: ' + seri.length + ' titles competing for ' + slot + ' slot' + (slot === 1 ? '' : 's') + '. Press Draw tie-break or decide manually.'; }
+    else if (perluCabut) { st.className = 'ok'; st.textContent = 'Tie-break drawn at random. 14 titles final.'; }
+    else { st.className = 'ok'; st.textContent = 'No tie. 14 titles final.'; }
     ring.appendChild(st);
     if (h.pengundi.length && perluCabut) {
-      var br = el('div', 'row'); var b = el('button', 'btn', seriPilih ? 'Cabut seri semula' : 'Cabut seri'); b.type = 'button';
+      var br = el('div', 'row'); var b = el('button', 'btn', seriPilih ? 'Redraw tie-break' : 'Draw tie-break'); b.type = 'button';
       b.addEventListener('click', function () {
         var a = seri.map(function (i) { return i[0]; });
         for (var k = a.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)); var t = a[k]; a[k] = a[r]; a[r] = t; }
@@ -406,7 +447,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     out.appendChild(ring);
 
     if (h.ralat.length) {
-      var pe = el('div', 'panel'); pe.appendChild(el('h2', '', h.ralat.length + ' mesej ditolak'));
+      var pe = el('div', 'panel'); pe.appendChild(el('h2', '', h.ralat.length + (h.ralat.length === 1 ? ' message rejected' : ' messages rejected')));
       h.ralat.forEach(function (r) { pe.appendChild(el('p', 'err', r)); });
       out.appendChild(pe);
     }
@@ -416,7 +457,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     var tampil = susun.filter(function (i) { return masuk[i[0]]; }).concat(susun.filter(function (i) { return !masuk[i[0]]; }));
     tampil.forEach(function (i) {
       var n = i[0], ia = !!masuk[n];
-      if (!ia && !potong) { potong = true; rk.appendChild(el('div', 'cut', 'Garis potong, 14 tajuk di atas')); }
+      if (!ia && !potong) { potong = true; rk.appendChild(el('div', 'cut', 'Cut line, top 14 titles above')); }
       var isSeri = perluCabut && kira_[n] === c14;
       var r = el('div', 'rk' + (ia ? ' in' : '') + (isSeri && !seriPilih ? ' tie' : ''));
       r.appendChild(el('span', 'n', String(n)));
@@ -427,16 +468,16 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     });
     out.appendChild(rk);
 
-    var teksHasil = 'KEPUTUSAN UNDI TAJUK BLACKBOX CDKK\n' + h.pengundi.length + ' pengundi sah\n\n14 TAJUK TERPILIH\n' +
-      susun.filter(function (i) { return masuk[i[0]]; }).map(function (i, x) { return (x + 1) + '. ' + i[1] + ' (' + kira_[i[0]] + ' undi)'; }).join('\n') +
-      '\n\nTIDAK TERPILIH\n' + susun.filter(function (i) { return !masuk[i[0]]; }).map(function (i) { return i[0] + '. ' + i[1] + ' (' + kira_[i[0]] + ')'; }).join('\n');
-    var pt = el('div', 'panel'); pt.appendChild(el('h2', '', 'Salin keputusan'));
+    var teksHasil = 'BLACKBOX TITLE VOTE RESULTS, CDKK\n' + h.pengundi.length + ' valid voters\n\nTOP 14 TITLES SELECTED\n' +
+      susun.filter(function (i) { return masuk[i[0]]; }).map(function (i, x) { return (x + 1) + '. ' + i[1] + ' (' + kira_[i[0]] + (kira_[i[0]] === 1 ? ' vote)' : ' votes)'); }).join('\n') +
+      '\n\nNOT SELECTED\n' + susun.filter(function (i) { return !masuk[i[0]]; }).map(function (i) { return i[0] + '. ' + i[1] + ' (' + kira_[i[0]] + ')'; }).join('\n');
+    var pt = el('div', 'panel'); pt.appendChild(el('h2', '', 'Copy results'));
     var pre = el('pre', 'msg', teksHasil); pt.appendChild(pre);
-    var rw = el('div', 'row'); var bs = el('button', 'btn', 'Salin teks'); bs.type = 'button';
-    bs.addEventListener('click', function () { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(teksHasil).then(function () { toast('Keputusan disalin'); }, function () { toast('Salin gagal, pilih teks sendiri'); }); else toast('Pilih teks dan salin sendiri'); });
+    var rw = el('div', 'row'); var bs = el('button', 'btn', 'Copy text'); bs.type = 'button';
+    bs.addEventListener('click', function () { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(teksHasil).then(function () { toast('Results copied'); }, function () { toast('Copy failed, select the text manually'); }); else toast('Select the text and copy it manually'); });
     rw.appendChild(bs); pt.appendChild(rw); out.appendChild(pt);
 
-    var pv = el('div', 'panel'); pv.appendChild(el('h2', '', 'Senarai pengundi'));
+    var pv = el('div', 'panel'); pv.appendChild(el('h2', '', 'Voter list'));
     var v = el('div', 'voters'); h.pengundi.forEach(function (p) { v.appendChild(el('p', '', [p.nama, p.jawatan, p.tempat].filter(Boolean).join(' · '))); }); pv.appendChild(v); out.appendChild(pv);
   }
 
