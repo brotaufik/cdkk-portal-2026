@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Undi Tajuk Blackbox</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Pilih 14 daripada 24 aktiviti FESMA untuk tajuk Blackbox CDKK. Siap dalam seminit.">
+<meta name="description" content="Pilih 14 daripada 33 aktiviti FESMA untuk tajuk Blackbox CDKK. Siap dalam seminit.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ms_MY">
 <meta property="og:site_name" content="CDKK @FESMA 2026">
 <meta property="og:title" content="Undi Tajuk Blackbox">
-<meta property="og:description" content="Pilih 14 daripada 24 aktiviti FESMA. Siap dalam seminit.">
+<meta property="og:description" content="Pilih 14 daripada 33 aktiviti FESMA. Siap dalam seminit.">
 <meta property="og:url" content="https://brotaufik.github.io/cdkk-portal-2026/undi/">
-<meta property="og:image" content="https://brotaufik.github.io/cdkk-portal-2026/undi/og.jpg">
+<meta property="og:image" content="https://brotaufik.github.io/cdkk-portal-2026/undi/og.jpg?v=3">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Undi Tajuk Blackbox, CDKK @FESMA 2026: pilih 14 daripada 24 tajuk">
+<meta property="og:image:alt" content="Undi Tajuk Blackbox, CDKK @FESMA 2026: pilih 14 daripada 33 tajuk">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
 <style>
 /* Susun atur: satu lajur telefon dahulu. Kad tajuk dikumpul ikut kluster, bar kiraan melekat di bawah.
-   Tab Pengira untuk penyelaras: tampal mesej WhatsApp, lihat kedudukan 24 tajuk. */
+   Tab Pengira untuk penyelaras: tampal mesej WhatsApp, lihat kedudukan 33 tajuk. */
 :root {
   --bg: #F2F4F9; --surface: #FFFFFF; --ink: #101A33; --muted: #55627F; --line: #D3DAE8;
   --accent: #1F3A8A; --on-accent: #FFFFFF; --pick: #E6ECFB; --pick-line: #1F3A8A;
@@ -129,7 +129,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   <header style="display:flex;flex-direction:column;gap:10px">
     <p class="kicker">CDKK @FESMA 2026 · Sabtu 7 November</p>
     <h1>Undi Tajuk Blackbox</h1>
-    <p class="lead">Pilih tepat 14 daripada 24 aktiviti FESMA untuk dijadikan subjek cabutan Blackbox. Setiap orang satu undi. Keputusan akhir ditentukan penyelaras.</p>
+    <p class="lead">Pilih tepat 14 daripada 33 tajuk FESMA untuk dijadikan subjek cabutan Blackbox. Setiap orang satu undi. Keputusan akhir ditentukan penyelaras.</p>
     <nav class="tabs" aria-label="Paparan">
       <a href="#undi" id="tabUndi">Undi saya</a>
       <a href="#pengira" id="tabPengira">Pengira</a>
@@ -198,6 +198,8 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 <script>
 (function () {
   var MAKS = 14;
+  var VERSI = 'v2'; // mesti sama dengan VERSI dalam skrip Apps Script
+  var BIL = 33;     // jumlah tajuk dalam senarai
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbz4fIHIjcBVR4gfru8djthttp8IL0cStmIBd5LjPP91_PMJT-QiGAUN84kwhDdU4-4W7A/exec'; // URL web app Apps Script (berakhir /exec). Kosong = hantar melalui WhatsApp.
   var PENERIMA = '60193888053'; // Nombor WhatsApp penyelaras, format 60123456789. Kosong = pengundi pilih sendiri.
   var ITEMS = [
@@ -209,34 +211,44 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     [6,'Jahitan: Baju Kurung Tradisional Pesak Buluh','Hari Kemahiran','Ruangan Hadapan Dewan','9.00am - 1.00pm',''],
     [7,'Anugerah Ikon Usahawan','Hari Kemahiran','Dewan Teater Aras 1','9.00am - 1.00pm','Majlis dalam dewan'],
     [8,'Pertandingan Marhaban dan Berzanji','IFEST','Pentas Utama','9.00am - 1.00pm',''],
-    [9,'KRISMA','Pempamer','Marquee Tent','',''],
-    [10,'Persatuan Kompang Fatani','Pempamer','Marquee Tent','',''],
-    [11,'AKRAB','Pempamer','Marquee Tent','',''],
-    [12,'JPJ','Pempamer','Marquee Tent','',''],
-    [13,'KKM','Pempamer','Marquee Tent','',''],
-    [14,'PERKESO','Pempamer','Marquee Tent','',''],
-    [15,'CuepacCare','Pempamer','Marquee Tent','',''],
-    [16,'Maggi','Pempamer','Marquee Tent','',''],
-    [17,'Bank Rakyat','Pempamer','Marquee Tent','',''],
-    [18,'Farmasi IMEDIKEL','Pempamer','Marquee Tent','',''],
-    [19,'Wanita Cukup Berani','Aktiviti Tarikan Pengunjung','Pentas Khemah Utama','8.00am - 1.00pm',''],
-    [20,'SlingShot Challenge','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
-    [21,'Masakan Dodol','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
-    [22,'Mencating Batik','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm',''],
-    [23,'Demo Membuat Kompang','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm',''],
-    [24,'Soft Toys','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm','']
+    [9,'JAKOA','Pempamer','Gerai A01 · Marquee Tent','',''],
+    [10,'UPSI','Pempamer','Gerai A02 · Marquee Tent','',''],
+    [11,'Makmal Perkembangan Autisme UKM','Pempamer','Gerai A03 · Marquee Tent','',''],
+    [12,'Farmasi Imedikal','Pempamer','Gerai A04 · Marquee Tent','',''],
+    [13,'AKRAB KEMAS','Pempamer','Gerai A05 · Marquee Tent','',''],
+    [14,'CuepacCare & PERKESO','Pempamer','Gerai A06 · Marquee Tent','',''],
+    [15,'Persatuan Kompang Fatani','Pempamer','Gerai A07 · Marquee Tent','',''],
+    [16,'Krisma Sarawak','Pempamer','Gerai A08 · Marquee Tent','',''],
+    [17,'Bank Rakyat','Pempamer','Motherbooth, Gerai A09 dan A10 · Marquee Tent','',''],
+    [18,'Maggi','Pempamer','Booth 30 kaki × 10 kaki · Marquee Tent','',''],
+    [19,'PediaSure','Pempamer','Booth 20 kaki × 10 kaki · Marquee Tent','',''],
+    [20,'Zero Beyond Wellness','Pempamer','Booth 20 kaki × 10 kaki · Marquee Tent','',''],
+    [21,'SlingShot Challenge','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
+    [22,'Masakan Dodol','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
+    [23,'Mencating Batik','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm',''],
+    [24,'Batik Clay Tanjung Sepat','Gerai Usahawan','Kraftangan batik clay','',''],
+    [25,'Kuih Keria Laksamana & Kuih Seri Warisan','Gerai Usahawan','Kuih keria dan kuih tradisi','',''],
+    [26,'Touch by MyraRis','Gerai Usahawan','Crochet dan kawat bulu','',''],
+    [27,'Alip Coffee','Gerai Usahawan','Kopi segar','',''],
+    [28,'Cendol Abg Kerol','Gerai Usahawan','Cendol dan manisan','',''],
+    [29,'Jemari Juna','Gerai Usahawan','Face painting dan manicure','',''],
+    [30,'AA Patin Pahang','Gerai Usahawan','Patin tempoyak Pahang','',''],
+    [31,'Aiskrim Klasik & Ais Jelly','Gerai Usahawan','Aiskrim klasik dan ais jelly','',''],
+    [32,'Nomey Kitchen','Gerai Usahawan','Oden dan dessert','',''],
+    [33,'Lepak Krup Krap','Gerai Usahawan','Satar, roti canai dan waffle','','']
   ];
-  var KLUSTER = ['Alpha Gen Talents','Hari Kemahiran','IFEST','Pempamer','Aktiviti Tarikan Pengunjung'];
-  var KLUSTER_NOTA = { 'Pempamer': 'Jam tidak dinyatakan dalam senarai FESMA' };
+  var KLUSTER = ['Alpha Gen Talents','Hari Kemahiran','IFEST','Pempamer','Aktiviti Tarikan Pengunjung','Gerai Usahawan'];
+  var KLUSTER_NOTA = { 'Pempamer': 'Jam tidak dinyatakan dalam senarai FESMA', 'Gerai Usahawan': 'Lokasi dan jam buka gerai dimaklumkan selepas pengesahan penganjur' };
   var $ = function (id) { return document.getElementById(id); };
   var pilih = {};           // no -> true
   var rows = {};            // no -> elemen label
+  var sedia = true;         // false jika skrip penerima belum dikemas kini ke senarai ini
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function jumlah() { return Object.keys(pilih).length; }
   function toast(t) { var x = $('toast'); x.textContent = t; x.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(function () { x.hidden = true; }, 2200); }
-  function simpan() { try { localStorage.setItem('undi-bb', JSON.stringify({ nama: $('nama').value, jawatan: $('jawatan').value, tempat: $('tempat').value, pilih: Object.keys(pilih) })); } catch (e) {} }
-  function muat() { try { var d = JSON.parse(localStorage.getItem('undi-bb') || 'null'); if (d) { $('nama').value = d.nama || ''; $('jawatan').value = d.jawatan || ''; $('tempat').value = d.tempat || ''; (d.pilih || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 24) pilih[n] = true; }); } } catch (e) {} }
+  function simpan() { try { localStorage.setItem('undi-bb2', JSON.stringify({ nama: $('nama').value, jawatan: $('jawatan').value, tempat: $('tempat').value, pilih: Object.keys(pilih) })); } catch (e) {} }
+  function muat() { try { var d = JSON.parse(localStorage.getItem('undi-bb2') || 'null'); if (d) { $('nama').value = d.nama || ''; $('jawatan').value = d.jawatan || ''; $('tempat').value = d.tempat || ''; (d.pilih || []).forEach(function (n) { n = +n; if (n >= 1 && n <= BIL) pilih[n] = true; }); } else { var o = JSON.parse(localStorage.getItem('undi-bb') || 'null'); if (o) { $('nama').value = o.nama || ''; $('jawatan').value = o.jawatan || ''; $('tempat').value = o.tempat || ''; } } } catch (e) {} }
 
   var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5"/></svg>';
   function bina() {
@@ -277,8 +289,8 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     $('count').innerHTML = j + '<small> / ' + MAKS + '</small>';
     $('prog').style.width = (j / MAKS * 100) + '%';
     var lengkap = $('nama').value.trim() && $('jawatan').value.trim() && $('tempat').value.trim();
-    $('progM').textContent = penuh ? (lengkap ? 'Sedia dihantar' : 'Isi nama, jawatan dan tempat bertugas') : 'Pilih ' + (MAKS - j) + ' lagi';
-    $('hantar').disabled = !(penuh && lengkap);
+    $('progM').textContent = !sedia ? 'Sistem undi sedang dikemas kini. Cuba semula sebentar lagi.' : (penuh ? (lengkap ? 'Sedia dihantar' : 'Isi nama, jawatan dan tempat bertugas') : 'Pilih ' + (MAKS - j) + ' lagi');
+    $('hantar').disabled = !(penuh && lengkap && sedia);
     $('reset').disabled = j === 0; if (j === 0) batalReset();
   }
   function konfeti() {
@@ -315,7 +327,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     if (!ENDPOINT) { paparWA(); return; }
     var b = $('hantar'); b.disabled = true; b.textContent = 'Menghantar...';
     var no = Object.keys(pilih).map(Number).sort(function (x, y) { return x - y; });
-    var data = { nama: $('nama').value.trim(), jawatan: $('jawatan').value.trim(), tempat: $('tempat').value.trim(), pilih: no };
+    var data = { nama: $('nama').value.trim(), jawatan: $('jawatan').value.trim(), tempat: $('tempat').value.trim(), pilih: no, versi: VERSI };
     fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
@@ -347,7 +359,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
       var no = p[1].split(/[\s,]+/).filter(Boolean).map(Number);
       var uniq = no.filter(function (v, i) { return no.indexOf(v) === i; });
       if (uniq.length !== no.length) { ralat.push(label + ': ada nombor berulang'); return; }
-      if (uniq.some(function (v) { return v < 1 || v > 24; })) { ralat.push(label + ': ada nombor di luar 1 hingga 24'); return; }
+      if (uniq.some(function (v) { return v < 1 || v > BIL; })) { ralat.push(label + ': ada nombor di luar 1 hingga ' + BIL + ''); return; }
       if (uniq.length !== MAKS) { ralat.push(label + ': ' + uniq.length + ' pilihan, perlu ' + MAKS); return; }
       var kunci = label.toLowerCase() + '|' + tempat.toLowerCase();
       if (!(kunci in oleh)) urut.push(kunci);
@@ -438,6 +450,15 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   }
 
   bina(); muat(); segar(); paparan();
+  function semakSistem() {
+    if (!ENDPOINT) return;
+    fetch(ENDPOINT, { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
+      var baru = !(j && j.versi && j.versi !== VERSI) && !(j && !j.versi);
+      if (baru !== sedia) { sedia = baru; segar(); }
+      if (!sedia) setTimeout(semakSistem, 30000);
+    }).catch(function () {});
+  }
+  semakSistem();
   window.addEventListener('hashchange', paparan);
   ['nama', 'jawatan', 'tempat'].forEach(function (k) { $(k).addEventListener('input', function () { segar(); simpan(); }); });
   $('hantar').addEventListener('click', hantar);
