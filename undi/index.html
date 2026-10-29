@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Undi Tajuk Blackbox</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Susun atur: satu lajur telefon dahulu. Kad tajuk dikumpul ikut kluster, bar kiraan melekat di bawah.
+   Tab Pengira untuk penyelaras: tampal mesej WhatsApp, lihat kedudukan 24 tajuk. */
+:root {
+  --bg: #F2F4F9; --surface: #FFFFFF; --ink: #101A33; --muted: #55627F; --line: #D3DAE8;
+  --accent: #1F3A8A; --on-accent: #FFFFFF; --pick: #E6ECFB; --pick-line: #1F3A8A;
+  --warn-bg: #FFF1D6; --warn-ink: #7A4A00; --ok: #0E7F52; --bad: #B3261E;
+  --f-display: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --f-body: 'Barlow', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1220; --surface: #131D36; --ink: #E8EDF5; --muted: #9CB0CF; --line: #26345C;
+    --accent: #FFD23F; --on-accent: #1A1200; --pick: #1D2B52; --pick-line: #FFD23F;
+    --warn-bg: #3A2B07; --warn-ink: #FFD98A; --ok: #4CD08F; --bad: #FF8A80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1220; --surface: #131D36; --ink: #E8EDF5; --muted: #9CB0CF; --line: #26345C;
+  --accent: #FFD23F; --on-accent: #1A1200; --pick: #1D2B52; --pick-line: #FFD23F;
+  --warn-bg: #3A2B07; --warn-ink: #FFD98A; --ok: #4CD08F; --bad: #FF8A80; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.45;
+  padding-block: 20px 120px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--f-display); text-transform: uppercase; letter-spacing: .02em; margin: 0; text-wrap: balance; }
+h1 { font-size: 38px; line-height: 1; font-weight: 800; }
+h2 { font-size: 22px; font-weight: 700; }
+p { margin: 0; }
+.kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.lead { color: var(--muted); max-width: 60ch; }
+.tabs { display: flex; gap: 8px; }
+.tabs a { flex: 1; text-align: center; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; color: var(--ink); text-decoration: none; font-weight: 700; background: var(--surface); }
+.tabs a[aria-current="page"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+label.lbl { font-weight: 700; }
+input[type=text], textarea { font: inherit; color: var(--ink); background: var(--surface); border: 2px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%; }
+textarea { min-height: 180px; resize: vertical; font-size: 15px; }
+input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible, .item:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+.cluster { display: flex; flex-direction: column; gap: 10px; }
+.cluster-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+.cluster-head span { color: var(--muted); font-size: 14px; }
+.item { display: grid; grid-template-columns: 28px 36px minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px; background: var(--surface); border: 2px solid var(--line); border-radius: 12px; cursor: pointer; }
+.item.on { background: var(--pick); border-color: var(--pick-line); }
+.item input { position: absolute; opacity: 0; pointer-events: none; }
+.box { width: 26px; height: 26px; border: 2px solid var(--muted); border-radius: 7px; display: grid; place-items: center; margin-top: 1px; }
+.item.on .box { background: var(--accent); border-color: var(--accent); }
+.box svg { width: 16px; height: 16px; stroke: var(--on-accent); stroke-width: 3; fill: none; opacity: 0; }
+.item.on .box svg { opacity: 1; }
+.no { font-family: var(--f-display); font-size: 26px; font-weight: 800; line-height: 1; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item.on .no { color: var(--ink); }
+.nama { font-weight: 700; overflow-wrap: anywhere; }
+.meta { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.tag { display: inline-block; margin-top: 6px; font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: var(--warn-bg); color: var(--warn-ink); }
+.item.lock { opacity: .45; cursor: not-allowed; }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 2px solid var(--line);
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); z-index: 5; }
+.bar-in { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+.count { font-family: var(--f-display); font-size: 34px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.count small { font-size: 18px; color: var(--muted); }
+.prog { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.prog-t { height: 8px; background: var(--line); border-radius: 6px; overflow: hidden; }
+.prog-t i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .15s; }
+.prog-m { font-size: 13px; color: var(--muted); }
+.btn { font: inherit; font-weight: 700; padding: 12px 18px; border-radius: 10px; border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent); cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
+.btn.sec { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn[disabled] { opacity: .4; cursor: not-allowed; }
+.panel { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--f-body); font-size: 15px; background: var(--bg); border: 2px dashed var(--line); border-radius: 10px; padding: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; }
+.note { font-size: 14px; color: var(--muted); }
+.err { color: var(--bad); font-weight: 600; }
+.ok { color: var(--ok); font-weight: 700; }
+.rank { display: flex; flex-direction: column; gap: 6px; }
+.rk { display: grid; grid-template-columns: 30px minmax(0, 1fr) 40px; gap: 10px; align-items: center; padding: 8px 10px; border: 2px solid var(--line); border-radius: 10px; background: var(--surface); }
+.rk.in { border-color: var(--accent); }
+.rk.tie { border-style: dashed; border-color: var(--warn-ink); }
+.rk .n { font-family: var(--f-display); font-size: 22px; font-weight: 800; color: var(--muted); }
+.rk .t { min-width: 0; }
+.rk .t b { display: block; overflow-wrap: anywhere; }
+.rk .t i { display: block; height: 6px; margin-top: 5px; border-radius: 4px; background: var(--line); }
+.rk.in .t i { background: var(--accent); }
+.rk .v { font-family: var(--f-display); font-size: 24px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.cut { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-top: 2px dashed var(--muted); padding-top: 6px; }
+.voters { columns: 2 160px; column-gap: 20px; font-size: 14px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 96px; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-weight: 600; z-index: 9; max-width: calc(100% - 32px); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <p class="kicker">CDKK @FESMA 2026 · Sabtu 7 November</p>
+    <h1>Undi Tajuk Blackbox</h1>
+    <p class="lead">Pilih tepat 14 daripada 24 aktiviti FESMA untuk dijadikan subjek cabutan Blackbox. Setiap orang satu undi. Keputusan akhir ditentukan penyelaras.</p>
+    <nav class="tabs" aria-label="Paparan">
+      <a href="#undi" id="tabUndi">Undi saya</a>
+      <a href="#pengira" id="tabPengira">Pengira</a>
+    </nav>
+  </header>
+
+  <main id="vUndi" style="display:flex;flex-direction:column;gap:20px">
+    <div class="field">
+      <label class="lbl" for="nama">Nama anda</label>
+      <input type="text" id="nama" autocomplete="name" placeholder="Contoh: Siti, PKM Kuching" maxlength="60">
+    </div>
+    <div id="senarai" style="display:flex;flex-direction:column;gap:24px"></div>
+
+    <section id="hasil" class="panel" hidden aria-live="polite">
+      <h2>Hantar undi anda</h2>
+      <p class="note">Tekan Buka WhatsApp dan hantar mesej ini kepada penyelaras tanpa mengubahnya. Jika WhatsApp tak terbuka, tekan Salin teks dan tampal sendiri.</p>
+      <pre class="msg" id="msg"></pre>
+      <div class="row">
+        <a class="btn" id="wa" target="_blank" rel="noopener">Buka WhatsApp</a>
+        <button class="btn sec" id="salin" type="button">Salin teks</button>
+        <button class="btn sec" id="ubah" type="button">Ubah pilihan</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="vPengira" hidden style="display:flex;flex-direction:column;gap:20px">
+    <div class="panel">
+      <h2>Tampal mesej undi</h2>
+      <p class="note">Tampal semua mesej WhatsApp sekali gus. Nama yang sama dikira sekali sahaja, mesej terakhir menang. Mesej yang tak cukup 14 pilihan ditolak.</p>
+      <textarea id="tampal" aria-label="Mesej undi daripada WhatsApp" placeholder="UNDI BLACKBOX CDKK&#10;Nama: ...&#10;Pilihan (14): 1, 2, 3, ..."></textarea>
+      <div class="row">
+        <button class="btn" id="kira" type="button">Kira undi</button>
+        <button class="btn sec" id="kosong" type="button">Kosongkan</button>
+      </div>
+    </div>
+    <div id="keputusan" style="display:flex;flex-direction:column;gap:16px"></div>
+  </main>
+</div>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="count" id="count">0<small> / 14</small></div>
+    <div class="prog"><div class="prog-t"><i id="prog"></i></div><div class="prog-m" id="progM">Pilih 14 tajuk</div></div>
+    <button class="btn" id="hantar" type="button" disabled>Hantar</button>
+  </div>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+(function () {
+  var MAKS = 14;
+  var PENERIMA = '60193888053'; // Nombor WhatsApp penyelaras, format 60123456789. Kosong = pengundi pilih sendiri.
+  var ITEMS = [
+    [1,'Pertandingan Bola Jaring','Alpha Gen Talents','Netball Court (Sebelah Dewan)','8.00am - 1.00pm',''],
+    [2,'Pertandingan Kids Athletics','Alpha Gen Talents','Padang','8.00am - 1.00pm',''],
+    [3,'Pertandingan Futsal','Alpha Gen Talents','Padang','8.00am - 1.00pm',''],
+    [4,'Seni Tangan: Sirih Junjung','Hari Kemahiran','Ruangan Hadapan Warung Membawang','8.00am - 12.00pm','Pertandingan pihak lain'],
+    [5,'Masakan: Merewang Kenduri','Hari Kemahiran','Ruangan Hadapan Khemah Utama','8.00am - 1.00pm','Pertandingan pihak lain'],
+    [6,'Jahitan: Baju Kurung Tradisional Pesak Buluh','Hari Kemahiran','Ruangan Hadapan Dewan','9.00am - 1.00pm','Pertandingan pihak lain'],
+    [7,'Anugerah Ikon Usahawan','Hari Kemahiran','Dewan Teater Aras 1','9.00am - 1.00pm','Majlis dalam dewan'],
+    [8,'Pertandingan Marhaban dan Berzanji','IFEST','Pentas Utama','9.00am - 1.00pm','Pertandingan pihak lain'],
+    [9,'KRISMA','Pempamer','Marquee Tent','',''],
+    [10,'Persatuan Kompang Fatani','Pempamer','Marquee Tent','',''],
+    [11,'AKRAB','Pempamer','Marquee Tent','',''],
+    [12,'JPJ','Pempamer','Marquee Tent','',''],
+    [13,'KKM','Pempamer','Marquee Tent','',''],
+    [14,'PERKESO','Pempamer','Marquee Tent','',''],
+    [15,'CuepacCare','Pempamer','Marquee Tent','',''],
+    [16,'Maggi','Pempamer','Marquee Tent','',''],
+    [17,'Bank Rakyat','Pempamer','Marquee Tent','',''],
+    [18,'Farmasi IMEDIKEL','Pempamer','Marquee Tent','',''],
+    [19,'Wanita Cukup Berani','Aktiviti Tarikan Pengunjung','Pentas Khemah Utama','8.00am - 1.00pm',''],
+    [20,'SlingShot Challenge','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
+    [21,'Masakan Dodol','Aktiviti Tarikan Pengunjung','Tepi Tasik','8.00am - 1.00pm',''],
+    [22,'Mencating Batik','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm',''],
+    [23,'Demo Membuat Kompang','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm',''],
+    [24,'Soft Toys','Aktiviti Tarikan Pengunjung','Perkampungan KEMAS','9.00am - 1.00pm','']
+  ];
+  var KLUSTER = ['Alpha Gen Talents','Hari Kemahiran','IFEST','Pempamer','Aktiviti Tarikan Pengunjung'];
+  var KLUSTER_NOTA = { 'Pempamer': 'Jam tidak dinyatakan dalam senarai FESMA' };
+  var $ = function (id) { return document.getElementById(id); };
+  var pilih = {};           // no -> true
+  var rows = {};            // no -> elemen label
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function jumlah() { return Object.keys(pilih).length; }
+  function toast(t) { var x = $('toast'); x.textContent = t; x.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(function () { x.hidden = true; }, 2200); }
+  function simpan() { try { localStorage.setItem('undi-bb', JSON.stringify({ nama: $('nama').value, pilih: Object.keys(pilih) })); } catch (e) {} }
+  function muat() { try { var d = JSON.parse(localStorage.getItem('undi-bb') || 'null'); if (d) { $('nama').value = d.nama || ''; (d.pilih || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 24) pilih[n] = true; }); } } catch (e) {} }
+
+  var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.5"/></svg>';
+  function bina() {
+    var host = $('senarai'); host.textContent = '';
+    KLUSTER.forEach(function (k) {
+      var g = ITEMS.filter(function (i) { return i[2] === k; });
+      var sec = el('section', 'cluster');
+      var hd = el('div', 'cluster-head'); hd.appendChild(el('h2', '', k)); hd.appendChild(el('span', '', g.length + ' tajuk')); sec.appendChild(hd);
+      if (KLUSTER_NOTA[k]) sec.appendChild(el('p', 'note', KLUSTER_NOTA[k]));
+      g.forEach(function (i) {
+        var lb = el('label', 'item'); var cb = el('input'); cb.type = 'checkbox'; cb.id = 'c' + i[0]; cb.setAttribute('aria-label', i[0] + '. ' + i[1]);
+        var bx = el('span', 'box'); bx.innerHTML = CHECK;
+        var no = el('span', 'no', String(i[0]));
+        var tx = el('div'); tx.appendChild(el('div', 'nama', i[1]));
+        var m = [i[3], i[4]].filter(Boolean).join(' · '); tx.appendChild(el('div', 'meta', m));
+        if (i[5]) tx.appendChild(el('span', 'tag', i[5]));
+        var lead = el('span'); lead.style.display = 'contents';
+        lb.appendChild(cb); lb.appendChild(bx); lb.appendChild(no); lb.appendChild(tx);
+        lb.style.gridTemplateColumns = '28px 36px minmax(0,1fr)';
+        cb.addEventListener('change', function () { togol(i[0], cb); });
+        rows[i[0]] = { lb: lb, cb: cb };
+        sec.appendChild(lb);
+      });
+      host.appendChild(sec);
+    });
+  }
+  function togol(n, cb) {
+    if (cb.checked) {
+      if (jumlah() >= MAKS) { cb.checked = false; toast('Sudah 14 tajuk. Nyahpilih satu dahulu.'); return; }
+      pilih[n] = true;
+    } else delete pilih[n];
+    segar(); simpan();
+  }
+  function segar() {
+    var j = jumlah(), penuh = j >= MAKS;
+    Object.keys(rows).forEach(function (n) {
+      var r = rows[n], on = !!pilih[n]; r.cb.checked = on; r.lb.classList.toggle('on', on); r.lb.classList.toggle('lock', penuh && !on);
+    });
+    $('count').innerHTML = j + '<small> / ' + MAKS + '</small>';
+    $('prog').style.width = (j / MAKS * 100) + '%';
+    var nama = $('nama').value.trim();
+    $('progM').textContent = penuh ? (nama ? 'Sedia dihantar' : 'Isi nama anda di atas') : 'Pilih ' + (MAKS - j) + ' lagi';
+    $('hantar').disabled = !(penuh && nama);
+  }
+  function teks() {
+    var no = Object.keys(pilih).map(Number).sort(function (a, b) { return a - b; });
+    return 'UNDI BLACKBOX CDKK\nNama: ' + $('nama').value.trim() + '\nPilihan (' + no.length + '): ' + no.join(', ');
+  }
+  function hantar() {
+    var t = teks(); $('msg').textContent = t;
+    $('wa').href = 'https://wa.me/' + PENERIMA + '?text=' + encodeURIComponent(t);
+    $('hasil').hidden = false; $('hasil').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function salin(t) {
+    function balik() { var r = document.createRange(); r.selectNodeContents($('msg')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Pilih teks dan salin sendiri'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { toast('Teks disalin'); }, balik); else balik();
+  }
+
+  /* ---------- Pengira ---------- */
+  var seriPilih = null;
+  function huraikan(txt) {
+    var bahagian = txt.split(/(?=UNDI\s+BLACKBOX)/i).filter(function (b) { return b.trim(); });
+    var oleh = {}, urut = [], ralat = [];
+    bahagian.forEach(function (b, idx) {
+      var m = b.match(/Nama\s*:\s*(.+)/i); var nama = m ? m[1].trim() : '';
+      var p = b.match(/Pilihan[^:\n]*:\s*([0-9][0-9,\s]*)/i);
+      var label = nama || ('Tanpa nama ' + (idx + 1));
+      if (!p) { ralat.push(label + ': baris Pilihan tidak dijumpai'); return; }
+      var no = p[1].split(/[\s,]+/).filter(Boolean).map(Number);
+      var uniq = no.filter(function (v, i) { return no.indexOf(v) === i; });
+      if (uniq.length !== no.length) { ralat.push(label + ': ada nombor berulang'); return; }
+      if (uniq.some(function (v) { return v < 1 || v > 24; })) { ralat.push(label + ': ada nombor di luar 1 hingga 24'); return; }
+      if (uniq.length !== MAKS) { ralat.push(label + ': ' + uniq.length + ' pilihan, perlu ' + MAKS); return; }
+      var kunci = label.toLowerCase();
+      if (!(kunci in oleh)) urut.push(kunci);
+      oleh[kunci] = { nama: label, no: uniq };
+    });
+    return { pengundi: urut.map(function (k) { return oleh[k]; }), ralat: ralat };
+  }
+  function kira() {
+    var h = huraikan($('tampal').value); seriPilih = null; paparHasil(h);
+  }
+  function paparHasil(h) {
+    var out = $('keputusan'); out.textContent = '';
+    if (!h.pengundi.length && !h.ralat.length) { out.appendChild(el('p', 'note', 'Tiada mesej untuk dikira.')); return; }
+    var kira_ = {}; ITEMS.forEach(function (i) { kira_[i[0]] = 0; });
+    h.pengundi.forEach(function (p) { p.no.forEach(function (n) { kira_[n]++; }); });
+    var susun = ITEMS.slice().sort(function (a, b) { return kira_[b[0]] - kira_[a[0]] || a[0] - b[0]; });
+    var c14 = kira_[susun[MAKS - 1][0]];
+    var atas = susun.filter(function (i) { return kira_[i[0]] > c14; });
+    var seri = susun.filter(function (i) { return kira_[i[0]] === c14; });
+    var slot = MAKS - atas.length;
+    var perluCabut = seri.length > slot;
+    var dipilihSeri = {};
+    if (!perluCabut) seri.forEach(function (i) { dipilihSeri[i[0]] = true; });
+    else if (seriPilih) seriPilih.forEach(function (n) { dipilihSeri[n] = true; });
+    var masuk = {}; atas.forEach(function (i) { masuk[i[0]] = true; }); Object.keys(dipilihSeri).forEach(function (n) { masuk[n] = true; });
+
+    var ring = el('div', 'panel');
+    ring.appendChild(el('h2', '', h.pengundi.length + ' pengundi sah'));
+    var st = el('p', 'note');
+    if (!h.pengundi.length) st.textContent = 'Tiada undi sah lagi.';
+    else if (perluCabut && !seriPilih) { st.className = 'err'; st.textContent = 'Seri pada undi ke-' + c14 + ': ' + seri.length + ' tajuk berebut ' + slot + ' tempat. Tekan Cabut seri atau putuskan sendiri.'; }
+    else if (perluCabut) { st.className = 'ok'; st.textContent = 'Seri sudah dicabut rawak. 14 tajuk muktamad.'; }
+    else { st.className = 'ok'; st.textContent = 'Tiada seri. 14 tajuk muktamad.'; }
+    ring.appendChild(st);
+    if (h.pengundi.length && perluCabut) {
+      var br = el('div', 'row'); var b = el('button', 'btn', seriPilih ? 'Cabut seri semula' : 'Cabut seri'); b.type = 'button';
+      b.addEventListener('click', function () {
+        var a = seri.map(function (i) { return i[0]; });
+        for (var k = a.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)); var t = a[k]; a[k] = a[r]; a[r] = t; }
+        seriPilih = a.slice(0, slot); paparHasil(h);
+      });
+      br.appendChild(b); ring.appendChild(br);
+    }
+    out.appendChild(ring);
+
+    if (h.ralat.length) {
+      var pe = el('div', 'panel'); pe.appendChild(el('h2', '', h.ralat.length + ' mesej ditolak'));
+      h.ralat.forEach(function (r) { pe.appendChild(el('p', 'err', r)); });
+      out.appendChild(pe);
+    }
+    if (!h.pengundi.length) return;
+
+    var rk = el('div', 'rank'); var potong = false;
+    var tampil = susun.filter(function (i) { return masuk[i[0]]; }).concat(susun.filter(function (i) { return !masuk[i[0]]; }));
+    tampil.forEach(function (i) {
+      var n = i[0], ia = !!masuk[n];
+      if (!ia && !potong) { potong = true; rk.appendChild(el('div', 'cut', 'Garis potong, 14 tajuk di atas')); }
+      var isSeri = perluCabut && kira_[n] === c14;
+      var r = el('div', 'rk' + (ia ? ' in' : '') + (isSeri && !seriPilih ? ' tie' : ''));
+      r.appendChild(el('span', 'n', String(n)));
+      var t = el('div', 't'); t.appendChild(el('b', '', i[1]));
+      var bar = document.createElement('i'); bar.style.width = (h.pengundi.length ? kira_[n] / h.pengundi.length * 100 : 0) + '%'; t.appendChild(bar);
+      r.appendChild(t); r.appendChild(el('span', 'v', String(kira_[n])));
+      rk.appendChild(r);
+    });
+    out.appendChild(rk);
+
+    var teksHasil = 'KEPUTUSAN UNDI TAJUK BLACKBOX CDKK\n' + h.pengundi.length + ' pengundi sah\n\n14 TAJUK TERPILIH\n' +
+      susun.filter(function (i) { return masuk[i[0]]; }).map(function (i, x) { return (x + 1) + '. ' + i[1] + ' (' + kira_[i[0]] + ' undi)'; }).join('\n') +
+      '\n\nTIDAK TERPILIH\n' + susun.filter(function (i) { return !masuk[i[0]]; }).map(function (i) { return i[0] + '. ' + i[1] + ' (' + kira_[i[0]] + ')'; }).join('\n');
+    var pt = el('div', 'panel'); pt.appendChild(el('h2', '', 'Salin keputusan'));
+    var pre = el('pre', 'msg', teksHasil); pt.appendChild(pre);
+    var rw = el('div', 'row'); var bs = el('button', 'btn', 'Salin teks'); bs.type = 'button';
+    bs.addEventListener('click', function () { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(teksHasil).then(function () { toast('Keputusan disalin'); }, function () { toast('Salin gagal, pilih teks sendiri'); }); else toast('Pilih teks dan salin sendiri'); });
+    rw.appendChild(bs); pt.appendChild(rw); out.appendChild(pt);
+
+    var pv = el('div', 'panel'); pv.appendChild(el('h2', '', 'Senarai pengundi'));
+    var v = el('div', 'voters'); h.pengundi.forEach(function (p) { v.appendChild(el('p', '', p.nama)); }); pv.appendChild(v); out.appendChild(pv);
+  }
+
+  /* ---------- Paparan ---------- */
+  function paparan() {
+    var p = location.hash === '#pengira';
+    $('vUndi').hidden = p; $('vPengira').hidden = !p; $('bar').hidden = p;
+    $('vUndi').style.display = p ? 'none' : 'flex'; $('vPengira').style.display = p ? 'flex' : 'none';
+    if (p) $('tabPengira').setAttribute('aria-current', 'page'); else $('tabPengira').removeAttribute('aria-current');
+    if (!p) $('tabUndi').setAttribute('aria-current', 'page'); else $('tabUndi').removeAttribute('aria-current');
+  }
+
+  bina(); muat(); segar(); paparan();
+  window.addEventListener('hashchange', paparan);
+  $('nama').addEventListener('input', function () { segar(); simpan(); });
+  $('hantar').addEventListener('click', hantar);
+  $('salin').addEventListener('click', function () { salin(teks()); });
+  $('ubah').addEventListener('click', function () { $('hasil').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  $('kira').addEventListener('click', kira);
+  $('kosong').addEventListener('click', function () { $('tampal').value = ''; seriPilih = null; $('keputusan').textContent = ''; });
+})();
+</script>
+
+</body>
+</html>
