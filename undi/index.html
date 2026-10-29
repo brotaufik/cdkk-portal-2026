@@ -45,6 +45,7 @@
   --box-bg: #16304D; --box-line: #6FBF4A; --box-on: #4CD08F; --box-tick: #06241A;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.45;
   padding-block: 20px 120px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
@@ -90,6 +91,14 @@ input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visib
 .btn { font: inherit; font-weight: 700; padding: 12px 18px; border-radius: 10px; border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent); cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
 .btn.sec { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn[disabled] { opacity: .4; cursor: not-allowed; }
+.okp { align-items: center; text-align: center; position: relative; overflow: hidden; border-color: var(--ok); }
+.okh { margin: 0; font-family: var(--f-display); font-size: 42px; font-weight: 800; line-height: 1.02; text-transform: uppercase; color: var(--ok); }
+.okimg { display: block; width: min(100%, 300px); height: auto; border-radius: 20px; }
+.okh, .okimg, .okp .note, .okp .row { position: relative; z-index: 1; }
+.confetti { position: absolute; z-index: 0; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti i { position: absolute; top: -14px; width: 9px; height: 15px; border-radius: 2px; opacity: 0; animation: jatuh 2.4s ease-in forwards; }
+@keyframes jatuh { 0% { opacity: 1; transform: translateY(0) rotate(0); } 100% { opacity: 0; transform: translateY(420px) rotate(540deg); } }
+@media (prefers-reduced-motion: reduce) { .confetti { display: none; } }
 .btn.rst { padding: 12px 12px; font-size: 14px; white-space: nowrap; }
 .btn.rst.sedia { border-color: var(--bad); color: var(--bad); }
 .panel { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
@@ -142,10 +151,12 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     </div>
     <div id="senarai" style="display:flex;flex-direction:column;gap:24px"></div>
 
-    <section id="ok" class="panel" hidden aria-live="polite">
-      <h2>Undi diterima</h2>
+    <section id="ok" class="panel okp" hidden aria-live="polite">
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <h2 class="okh">Undi Anda Berjaya!!!</h2>
+      <img class="okimg" src="anak.jpg" width="640" height="550" alt="Kanak-kanak melompat gembira">
       <p class="note" id="okNota">Terima kasih. Undi anda telah direkodkan.</p>
-      <div class="row"><button class="btn sec" id="ubah2" type="button">Ubah undi</button></div>
+      <div class="row" style="justify-content:center"><button class="btn sec" id="ubah2" type="button">Ubah undi</button></div>
     </section>
 
     <section id="hasil" class="panel" hidden aria-live="polite">
@@ -270,6 +281,18 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     $('hantar').disabled = !(penuh && lengkap);
     $('reset').disabled = j === 0; if (j === 0) batalReset();
   }
+  function konfeti() {
+    var c = $('confetti'); c.textContent = '';
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var w = ['#FFD23F', '#4CD08F', '#4C7DFF', '#FF8A80', '#9B6BFF', '#6FBF4A'];
+    for (var i = 0; i < 36; i++) {
+      var p = document.createElement('i');
+      p.style.left = (Math.random() * 100) + '%'; p.style.background = w[i % w.length];
+      p.style.animationDelay = (Math.random() * 0.7) + 's'; p.style.animationDuration = (1.8 + Math.random() * 1.2) + 's';
+      c.appendChild(p);
+    }
+    setTimeout(function () { c.textContent = ''; }, 4000);
+  }
   var resetT = null;
   function batalReset() { var b = $('reset'); clearTimeout(resetT); b.classList.remove('sedia'); b.textContent = 'Reset'; }
   function resetPilihan() {
@@ -298,7 +321,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
       .then(function (j) {
         if (j && j.ok) {
           $('okNota').textContent = j.baharu === false ? 'Undi anda dikemas kini. Hanya undi terakhir dikira.' : 'Terima kasih. Undi anda telah direkodkan.';
-          $('hasil').hidden = true; $('ok').hidden = false; $('ok').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          $('hasil').hidden = true; $('ok').hidden = false; konfeti(); $('ok').scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else toast((j && j.ralat) || 'Undi tidak diterima. Cuba lagi.');
       })
       .catch(function () { paparWA('Penghantaran terus tidak dapat disahkan. Hantar melalui WhatsApp sebagai sandaran.'); })
