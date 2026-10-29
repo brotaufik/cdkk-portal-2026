@@ -123,9 +123,15 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     </div>
     <div id="senarai" style="display:flex;flex-direction:column;gap:24px"></div>
 
+    <section id="ok" class="panel" hidden aria-live="polite">
+      <h2>Undi diterima</h2>
+      <p class="note" id="okNota">Terima kasih. Undi anda telah direkodkan.</p>
+      <div class="row"><button class="btn sec" id="ubah2" type="button">Ubah undi</button></div>
+    </section>
+
     <section id="hasil" class="panel" hidden aria-live="polite">
       <h2>Hantar undi anda</h2>
-      <p class="note">Tekan Buka WhatsApp dan hantar mesej ini kepada penyelaras tanpa mengubahnya. Jika WhatsApp tak terbuka, tekan Salin teks dan tampal sendiri.</p>
+      <p class="note" id="waNota">Tekan Buka WhatsApp dan hantar mesej ini kepada penyelaras tanpa mengubahnya. Jika WhatsApp tak terbuka, tekan Salin teks dan tampal sendiri.</p>
       <pre class="msg" id="msg"></pre>
       <div class="row">
         <a class="btn" id="wa" target="_blank" rel="noopener">Buka WhatsApp</a>
@@ -161,6 +167,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
 <script>
 (function () {
   var MAKS = 14;
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbz4fIHIjcBVR4gfru8djthttp8IL0cStmIBd5LjPP91_PMJT-QiGAUN84kwhDdU4-4W7A/exec'; // URL web app Apps Script (berakhir /exec). Kosong = hantar melalui WhatsApp.
   var PENERIMA = '60193888053'; // Nombor WhatsApp penyelaras, format 60123456789. Kosong = pengundi pilih sendiri.
   var ITEMS = [
     [1,'Pertandingan Bola Jaring','Alpha Gen Talents','Netball Court (Sebelah Dewan)','8.00am - 1.00pm',''],
@@ -247,10 +254,27 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
     var no = Object.keys(pilih).map(Number).sort(function (a, b) { return a - b; });
     return 'UNDI BLACKBOX CDKK\nNama Penuh: ' + $('nama').value.trim() + '\nJawatan: ' + $('jawatan').value.trim() + '\nTempat Bertugas: ' + $('tempat').value.trim() + '\nPilihan (' + no.length + '): ' + no.join(', ');
   }
-  function hantar() {
+  function paparWA(nota) {
     var t = teks(); $('msg').textContent = t;
     $('wa').href = 'https://wa.me/' + PENERIMA + '?text=' + encodeURIComponent(t);
+    if (nota) $('waNota').textContent = nota;
     $('hasil').hidden = false; $('hasil').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function hantar() {
+    if (!ENDPOINT) { paparWA(); return; }
+    var b = $('hantar'); b.disabled = true; b.textContent = 'Menghantar...';
+    var no = Object.keys(pilih).map(Number).sort(function (x, y) { return x - y; });
+    var data = { nama: $('nama').value.trim(), jawatan: $('jawatan').value.trim(), tempat: $('tempat').value.trim(), pilih: no };
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          $('okNota').textContent = j.baharu === false ? 'Undi anda dikemas kini. Hanya undi terakhir dikira.' : 'Terima kasih. Undi anda telah direkodkan.';
+          $('hasil').hidden = true; $('ok').hidden = false; $('ok').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else toast((j && j.ralat) || 'Undi tidak diterima. Cuba lagi.');
+      })
+      .catch(function () { paparWA('Penghantaran terus tidak dapat disahkan. Hantar melalui WhatsApp sebagai sandaran.'); })
+      .then(function () { b.textContent = 'Hantar'; segar(); });
   }
   function salin(t) {
     function balik() { var r = document.createRange(); r.selectNodeContents($('msg')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Pilih teks dan salin sendiri'); }
@@ -367,6 +391,7 @@ pre.msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family
   ['nama', 'jawatan', 'tempat'].forEach(function (k) { $(k).addEventListener('input', function () { segar(); simpan(); }); });
   $('hantar').addEventListener('click', hantar);
   $('salin').addEventListener('click', function () { salin(teks()); });
+  $('ubah2').addEventListener('click', function () { $('ok').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
   $('ubah').addEventListener('click', function () { $('hasil').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
   $('kira').addEventListener('click', kira);
   $('kosong').addEventListener('click', function () { $('tampal').value = ''; seriPilih = null; $('keputusan').textContent = ''; });
