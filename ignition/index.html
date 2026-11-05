@@ -347,13 +347,14 @@ function fxLoop(){cx.clearRect(0,0,1920,1080);parts.forEach(p=>{p.x+=p.vx;p.y+=p
 // ---------- stages ----------
 let S=-1,T=[];const clr=()=>{T.forEach(clearTimeout);T=[]};const later=(f,ms)=>T.push(setTimeout(f,ms));
 function type(el,txt,ms,cb){let i=0;el.innerHTML='<span class="cur"></span>';const it=setInterval(()=>{i++;el.innerHTML=txt.slice(0,i)+'<span class="cur"></span>';if(i%3===0)SFX.blip();if(i>=txt.length){clearInterval(it);el.textContent=txt;cb&&cb()}},ms);T.push(it)}
+function talk(d){noise(1.6,300,4000,.2);later(()=>{$('holo').classList.add('talk');let k=0;const nx=()=>{if(k>=4){$('holo').classList.remove('talk');return}type($('l'+(k+1)),LINES[k],k===3?42:48,()=>{k++;later(nx,450)})};nx()},d)}
 const LINES=['Selamat pagi Malaysia.','Saya AURORA, avatar AI rasmi CDKK @FESMA 2026.','Empat belas negeri sedang menunggu.','Saya memerlukan kebenaran Ketua Pengarah untuk menghidupkan sistem.'];
 let go5mon=false;const MON='',MON_FLASH=10.2,MON_LEN=14.1;let VL=[],vidURL=VL.length?'x':'',vi=0;
 function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').forEach(e=>e.classList.remove('on','go'));$('s'+n).classList.add('on');$('grid').style.opacity=n>=1?1:0;heart(n===0);$('vidFull').style.display='none';try{$('vidFull').pause()}catch(e){}{const m=$('vidMon');m.onended=null;m.ontimeupdate=null;try{m.pause()}catch(e){}m.style.display='none';m.classList.remove('off')}
  hud();
  if(n===1){$('holo').classList.remove('talk');['l1','l2','l3','l4'].forEach(i=>$(i).textContent='');
   if(VL.length){vi=0;const v=$('vidFull');v.src=VL[0];v.style.display='block';v.currentTime=0;v.play().catch(()=>{});return}
-  noise(1.6,300,4000,.2);later(()=>{$('holo').classList.add('talk');let k=0;const nx=()=>{if(k>=4){$('holo').classList.remove('talk');return}type($('l'+(k+1)),LINES[k],k===3?42:48,()=>{k++;later(nx,450)})};nx()},1800)}
+  talk(1800)}
  if(n===2){$('g2').classList.remove('on');$('pct').textContent='MENUNGGU IMBASAN';$('s2').classList.add('go');SFX.scan();let p=0;const it=setInterval(()=>{p=Math.min(100,p+1);$('pct').textContent='MENGIMBAS '+p+'%';if(p>=100){clearInterval(it);$('pct').textContent='MENGESAHKAN IDENTITI';later(()=>{$('g2').classList.add('on');SFX.grant();later(()=>go(3),4200)},JEDA_MS)}},SCAN_S*10);T.push(it)}
  if(n===3){const L=$('log');L.innerHTML='';NEG.forEach((x,i)=>$('n'+i).classList.remove('on'));$('nOn').textContent='00';
   const BOOT=['> CDKK KERNEL 2026 · BOOT','> Memuatkan modul SPRINT 480 ... OK','> Memuatkan Blackbox Control Room v3.5.2 ... OK','> Memuatkan Konsol Hakim dan Juri Awam ... OK','> AURORA core ... ONLINE','> Enjin SHA-256 ... OK','> Menyambung 14 negeri ...'];
@@ -385,7 +386,7 @@ addEventListener('keydown',e=>{const k=e.key;
  else if(k==='ArrowLeft'||k==='PageUp')go(S-1);else if(k==='r'||k==='R')go(0);else if(k==='f'||k==='F')full();else if(k==='m'||k==='M'){mute=!mute;hud();heart(!mute&&S===0)}
  else if(k==='h'||k==='H')$('hud').classList.toggle('on');else if(k==='v'||k==='V')$('fv').click();else if(/^[0-5]$/.test(k))go(+k)});
 $('fv').onchange=e=>{const fs=[...e.target.files].sort((a,b)=>a.name.localeCompare(b.name));if(!fs.length)return;VL=fs.map(f=>URL.createObjectURL(f));vidURL='x';hud();$('hud').classList.add('on')};
-$('vidFull').onended=()=>{if(S!==1)return;const v=$('vidFull');if(++vi<VL.length){v.src=VL[vi];v.currentTime=0;v.play().catch(()=>{});return}v.style.display='none'};
+$('vidFull').onended=()=>{if(S!==1)return;const v=$('vidFull');if(++vi<VL.length){v.src=VL[vi];v.currentTime=0;v.play().catch(()=>{});return}v.style.display='none';talk(600)};
 // ---------- iPad ----------
 let mode='',ipBusy=false,ipT=null,ipH=null,ipIt=null,backup=false;
 function bkOn(on){backup=!!on;const b=$('bk');if(b)b.classList.toggle('on',backup)}
