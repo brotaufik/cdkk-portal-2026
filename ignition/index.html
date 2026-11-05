@@ -43,6 +43,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;color:var(--tx)
 .dlg .ln.k{color:var(--gd);text-shadow:0 0 24px #ffda3366}
 .cur{display:inline-block;width:20px;height:44px;background:var(--cy);vertical-align:-6px;margin-left:6px;animation:bl .8s infinite}
 #vidFull{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:none;z-index:50}
+#vidMon{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:none;z-index:45;transition:opacity .7s}#vidMon.off{opacity:0}
 /* 2 imbasan */
 #s2{display:flex;flex-direction:column;align-items:center;justify-content:center}
 #s2 .t{font-size:20px;letter-spacing:.45em;color:var(--cy);font-weight:800;margin-bottom:14px;opacity:.85}
@@ -262,7 +263,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;color:var(--tx)
 <i class="ring" id="ring"></i><i class="ring" id="ring2"></i>
 <canvas id="fx" width="1920" height="1080"></canvas>
 <div class="flash" id="flash"></div>
-<video id="vidFull" playsinline></video>
+<video id="vidFull" playsinline></video><video id="vidMon" playsinline preload="auto"></video>
 <div class="vig"></div><div class="scan"></div>
 </div>
 <div class="hud mono" id="hud"></div>
@@ -347,8 +348,8 @@ function fxLoop(){cx.clearRect(0,0,1920,1080);parts.forEach(p=>{p.x+=p.vx;p.y+=p
 let S=-1,T=[];const clr=()=>{T.forEach(clearTimeout);T=[]};const later=(f,ms)=>T.push(setTimeout(f,ms));
 function type(el,txt,ms,cb){let i=0;el.innerHTML='<span class="cur"></span>';const it=setInterval(()=>{i++;el.innerHTML=txt.slice(0,i)+'<span class="cur"></span>';if(i%3===0)SFX.blip();if(i>=txt.length){clearInterval(it);el.textContent=txt;cb&&cb()}},ms);T.push(it)}
 const LINES=['Selamat pagi Malaysia.','Saya AURORA, avatar AI rasmi CDKK @FESMA 2026.','Empat belas negeri sedang menunggu.','Saya memerlukan kebenaran Ketua Pengarah untuk menghidupkan sistem.'];
-let VL=[],vidURL=VL.length?'x':'',vi=0;
-function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').forEach(e=>e.classList.remove('on','go'));$('s'+n).classList.add('on');$('grid').style.opacity=n>=1?1:0;heart(n===0);$('vidFull').style.display='none';try{$('vidFull').pause()}catch(e){}
+let go5mon=false;const MON='',MON_FLASH=7.4,MON_LEN=12;let VL=[],vidURL=VL.length?'x':'',vi=0;
+function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').forEach(e=>e.classList.remove('on','go'));$('s'+n).classList.add('on');$('grid').style.opacity=n>=1?1:0;heart(n===0);$('vidFull').style.display='none';try{$('vidFull').pause()}catch(e){}{const m=$('vidMon');m.onended=null;m.ontimeupdate=null;try{m.pause()}catch(e){}m.style.display='none';m.classList.remove('off')}
  hud();
  if(n===1){$('holo').classList.remove('talk');['l1','l2','l3','l4'].forEach(i=>$(i).textContent='');
   if(VL.length){vi=0;const v=$('vidFull');v.src=VL[0];v.style.display='block';v.currentTime=0;v.play().catch(()=>{});return}
@@ -362,6 +363,7 @@ function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').
   later(()=>go(4),2000+14*650+1800)}
  if(n===4){let c=10;const R=$('cdR'),N=$('cdN');const set=()=>{N.textContent=c;N.classList.remove('pop');void N.offsetWidth;N.classList.add('pop');R.style.strokeDashoffset=2073*(1-c/10);SFX.tick()};set();
   const it=setInterval(()=>{c--;if(c===2)SFX.riser();if(c<=0){clearInterval(it);go(5);return}set()},1000);T.push(it)}
+ if(n===5&&MON&&!go5mon){go5mon=true;const s5=$('s5');s5.classList.remove('on');const m=$('vidMon');m.src=MON;m.classList.remove('off');m.style.display='block';m.currentTime=0;m.muted=mute;let boomed=false;m.ontimeupdate=()=>{if(!boomed&&m.currentTime>=MON_FLASH){boomed=true;SFX.boom();confetti()}};const fin=()=>{m.onended=null;m.ontimeupdate=null;if(!boomed){SFX.boom()}s5.classList.add('on');m.classList.add('off');later(()=>{m.style.display='none';try{m.pause()}catch(e){}},800);['ring','ring2'].forEach((r,i)=>{const e=$(r);e.classList.remove('go');void e.offsetWidth;later(()=>e.classList.add('go'),i*250)});confetti();later(confetti,1800);go5mon=false};m.onended=fin;later(()=>{if(go5mon)fin()},(MON_LEN+1.5)*1000);m.play().catch(()=>fin());return}
  if(n===5){$('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');['ring','ring2'].forEach((r,i)=>{const e=$(r);e.classList.remove('go');void e.offsetWidth;later(()=>e.classList.add('go'),i*250)});SFX.boom();confetti();later(confetti,1800)}}
 function hud(){$('hud').textContent='BABAK '+S+' · '+['TIDUR','AURORA','IMBASAN','BOOT 14 NEGERI','KIRAAN 10','SYSTEM ONLINE'][S]+(vidURL?' · VIDEO AURORA DIMUAT ('+VL.length+')':'')+(backup?' · BACKUP':'')+(mute?' · SENYAP':'')+' · ESC 2X: PAPAN PEMUKA'}
 function fsEl(){return document.fullscreenElement||document.webkitFullscreenElement||null}
