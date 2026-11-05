@@ -348,7 +348,7 @@ function fxLoop(){cx.clearRect(0,0,1920,1080);parts.forEach(p=>{p.x+=p.vx;p.y+=p
 let S=-1,T=[];const clr=()=>{T.forEach(clearTimeout);T=[]};const later=(f,ms)=>T.push(setTimeout(f,ms));
 function type(el,txt,ms,cb){let i=0;el.innerHTML='<span class="cur"></span>';const it=setInterval(()=>{i++;el.innerHTML=txt.slice(0,i)+'<span class="cur"></span>';if(i%3===0)SFX.blip();if(i>=txt.length){clearInterval(it);el.textContent=txt;cb&&cb()}},ms);T.push(it)}
 const LINES=['Selamat pagi Malaysia.','Saya AURORA, avatar AI rasmi CDKK @FESMA 2026.','Empat belas negeri sedang menunggu.','Saya memerlukan kebenaran Ketua Pengarah untuk menghidupkan sistem.'];
-let go5mon=false;const MON='montaj.mp4',MON_FLASH=10.2,MON_LEN=14.1;let VL=[],vidURL=VL.length?'x':'',vi=0;
+let go5mon=false;const MON='montaj.mp4',MON_FLASH=10.2,MON_LEN=14.1;let VL=["aurora60.mp4?v=60b"],vidURL=VL.length?'x':'',vi=0;
 function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').forEach(e=>e.classList.remove('on','go'));$('s'+n).classList.add('on');$('grid').style.opacity=n>=1?1:0;heart(n===0);$('vidFull').style.display='none';try{$('vidFull').pause()}catch(e){}{const m=$('vidMon');m.onended=null;m.ontimeupdate=null;try{m.pause()}catch(e){}m.style.display='none';m.classList.remove('off')}
  hud();
  if(n===1){$('holo').classList.remove('talk');['l1','l2','l3','l4'].forEach(i=>$(i).textContent='');
@@ -418,7 +418,7 @@ if(location.hash==='#ipad')$('pIpad').focus();
 // ---------- papan pemuka v2.0 ----------
 (function(){
  const set=(id,ok,txt)=>{const l=$('led'+id),t=$('tx'+id);if(l)l.className='led'+(ok===true?' ok':ok===false?' no':'');if(t&&txt)t.textContent=txt};
- if(VL.length){set('V',null,'Dibenamkan · memeriksa tempoh');try{const v=document.createElement('video');v.preload='metadata';v.muted=true;
+ if(BUILD==='web'&&VL.length&&!/^(blob|data):/.test(VL[0])){set('V',null,'Memuat video AURORA 60 s dari GitHub...');fetch(VL[0],{cache:'reload'}).then(r=>{if(!r.ok)throw 0;return r.blob()}).then(bl=>{VL=[URL.createObjectURL(bl)];vidURL='x';set('V',true,'AURORA 60 s · GitHub · '+Math.round(bl.size/1048576)+' MB sedia');try{hud()}catch(e){}}).catch(()=>{VL=[];vidURL='';webVid(set)})}else if(VL.length){set('V',null,'Dibenamkan · memeriksa tempoh');try{const v=document.createElement('video');v.preload='metadata';v.muted=true;
   v.onloadedmetadata=()=>{set('V',true,'Dibenamkan · '+Math.round(v.duration)+' saat');v.removeAttribute('src');v.load()};v.onerror=()=>set('V',false,'Ralat membaca video');v.src=VL[0]}catch(e){set('V',true,'Dibenamkan')}}
  else if(BUILD==='ipad')set('V',true,'Tidak perlu di iPad 1');else if(BUILD==='web')webVid(set);else set('V',false,'Tiada video · tekan V selepas MOD LED');
  try{loadBoom()}catch(e){}

@@ -418,7 +418,7 @@ if(location.hash==='#ipad')$('pIpad').focus();
 // ---------- papan pemuka v2.0 ----------
 (function(){
  const set=(id,ok,txt)=>{const l=$('led'+id),t=$('tx'+id);if(l)l.className='led'+(ok===true?' ok':ok===false?' no':'');if(t&&txt)t.textContent=txt};
- if(VL.length){set('V',null,'Dibenamkan · memeriksa tempoh');try{const v=document.createElement('video');v.preload='metadata';v.muted=true;
+ if(BUILD==='web'&&VL.length&&!/^(blob|data):/.test(VL[0])){set('V',null,'Memuat video AURORA 60 s dari GitHub...');fetch(VL[0],{cache:'reload'}).then(r=>{if(!r.ok)throw 0;return r.blob()}).then(bl=>{VL=[URL.createObjectURL(bl)];vidURL='x';set('V',true,'AURORA 60 s · GitHub · '+Math.round(bl.size/1048576)+' MB sedia');try{hud()}catch(e){}}).catch(()=>{VL=[];vidURL='';webVid(set)})}else if(VL.length){set('V',null,'Dibenamkan · memeriksa tempoh');try{const v=document.createElement('video');v.preload='metadata';v.muted=true;
   v.onloadedmetadata=()=>{set('V',true,'Dibenamkan · '+Math.round(v.duration)+' saat');v.removeAttribute('src');v.load()};v.onerror=()=>set('V',false,'Ralat membaca video');v.src=VL[0]}catch(e){set('V',true,'Dibenamkan')}}
  else if(BUILD==='ipad')set('V',true,'Tidak perlu di iPad 1');else if(BUILD==='web')webVid(set);else set('V',false,'Tiada video · tekan V selepas MOD LED');
  try{loadBoom()}catch(e){}
