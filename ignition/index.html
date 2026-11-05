@@ -274,6 +274,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;color:var(--tx)
  <div class="chips"><span class="chip">SABTU 7 NOV 2026</span><span class="chip">8.04 PAGI</span><span class="chip">DEWAN KONVOKESYEN UIS</span></div>
  <div class="well w-stat"><h3>STATUS SISTEM</h3>
   <div class="stt"><i class="led" id="ledV"></i><div>Video AURORA<small id="txV">Memeriksa...</small></div></div>
+  <button class="tbtn" id="tVid" hidden>▶ Pilih video AURORA (Gimik_CDKK.mp4)</button>
   <div class="stt"><i class="led" id="ledB"></i><div>Bunyi letupan<small id="txB">Memuatkan...</small></div></div>
   <div class="stt"><i class="led" id="ledA"></i><div>Audio pelayar<small id="txA">Aktif selepas klik pertama</small></div></div>
  </div>
@@ -398,6 +399,18 @@ function petaBuka(){const p=$('peta');p.classList.add('on');p.scrollTop=0;try{$(
 function petaTutup(){$('peta').classList.remove('on')}
 document.querySelectorAll('[data-peta]').forEach(b=>b.onclick=petaBuka);$('petaX').onclick=petaTutup;
 const BUILD='ipad';
+/* v2.3 web: video AURORA dipilih dari cakera MacBook sekali; pemegang fail disimpan dalam IndexedDB dan diguna semula dengan satu klik (Chrome). */
+function webVid(set){const b=$('tVid');b.hidden=false;set('V',false,'Klik butang di bawah: pilih Gimik_CDKK.mp4 dari cakera');
+ const DB=()=>new Promise((ok,no)=>{const r=indexedDB.open('cdkk-ign',1);r.onupgradeneeded=()=>r.result.createObjectStore('h');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+ const simpan=async h=>{try{const d=await DB();d.transaction('h','readwrite').objectStore('h').put(h,'vid')}catch(e){}};
+ const baca=()=>new Promise(ok=>{DB().then(d=>{const q=d.transaction('h').objectStore('h').get('vid');q.onsuccess=()=>ok(q.result||null);q.onerror=()=>ok(null)}).catch(()=>ok(null))});
+ const guna=async f=>{VL=[URL.createObjectURL(f)];vidURL='x';set('V',true,'Tempatan · '+f.name+' · '+Math.round(f.size/1048576)+' MB');b.textContent='✓ '+f.name+' (klik untuk tukar)';try{hud()}catch(e){}};
+ const pilih=async()=>{if(window.showOpenFilePicker){try{const [h]=await showOpenFilePicker({types:[{description:'Video',accept:{'video/mp4':['.mp4','.mov','.m4v']}}],multiple:false});await simpan(h);await guna(await h.getFile())}catch(e){}}else $('fv').click()};
+ b.onclick=pilih;
+ baca().then(async h=>{if(!h)return;try{const p=await h.queryPermission({mode:'read'});if(p==='granted'){await guna(await h.getFile());return}
+  set('V',null,'Fail diingati: '+h.name+' · klik butang untuk benarkan');b.textContent='▶ Guna semula '+h.name;
+  b.onclick=async()=>{try{if((await h.requestPermission({mode:'read'}))==='granted'){await guna(await h.getFile());b.onclick=pilih}else pilih()}catch(e){pilih()}}}catch(e){}});
+}
 if(BUILD==='ipad'){[$('pLed'),$('pBkp')].forEach(b=>{b.disabled=true;b.classList.add('off');b.querySelector('.cta').textContent='UNTUK MACBOOK SAHAJA'});$('pIpad').classList.add('hl');$('verTx').textContent='Versi 2.3 · fail iPad 1'}
 if(location.hash==='#ipad')$('pIpad').focus();
 // ---------- papan pemuka v2.0 ----------
@@ -405,7 +418,7 @@ if(location.hash==='#ipad')$('pIpad').focus();
  const set=(id,ok,txt)=>{const l=$('led'+id),t=$('tx'+id);if(l)l.className='led'+(ok===true?' ok':ok===false?' no':'');if(t&&txt)t.textContent=txt};
  if(VL.length){set('V',null,'Dibenamkan · memeriksa tempoh');try{const v=document.createElement('video');v.preload='metadata';v.muted=true;
   v.onloadedmetadata=()=>{set('V',true,'Dibenamkan · '+Math.round(v.duration)+' saat');v.removeAttribute('src');v.load()};v.onerror=()=>set('V',false,'Ralat membaca video');v.src=VL[0]}catch(e){set('V',true,'Dibenamkan')}}
- else if(BUILD==='ipad')set('V',true,'Tidak perlu di iPad 1');else set('V',false,'Tiada video · tekan V selepas MOD LED');
+ else if(BUILD==='ipad')set('V',true,'Tidak perlu di iPad 1');else if(BUILD==='web')webVid(set);else set('V',false,'Tiada video · tekan V selepas MOD LED');
  try{loadBoom()}catch(e){}
  let n=0;const bt=setInterval(()=>{if(BOOM){set('B',true,'Sedia · '+Math.round(BOOM.duration)+' saat');clearInterval(bt)}else if(++n>60){set('B',false,'Gagal dimuat · bunyi asas digunakan');clearInterval(bt)}},250);
  const au=()=>{const on=AC&&AC.state==='running';set('A',on?true:null,on?'Aktif':'Aktif selepas klik pertama')};au();
