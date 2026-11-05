@@ -348,7 +348,7 @@ function fxLoop(){cx.clearRect(0,0,1920,1080);parts.forEach(p=>{p.x+=p.vx;p.y+=p
 let S=-1,T=[];const clr=()=>{T.forEach(clearTimeout);T=[]};const later=(f,ms)=>T.push(setTimeout(f,ms));
 function type(el,txt,ms,cb){let i=0;el.innerHTML='<span class="cur"></span>';const it=setInterval(()=>{i++;el.innerHTML=txt.slice(0,i)+'<span class="cur"></span>';if(i%3===0)SFX.blip();if(i>=txt.length){clearInterval(it);el.textContent=txt;cb&&cb()}},ms);T.push(it)}
 const LINES=['Selamat pagi Malaysia.','Saya AURORA, avatar AI rasmi CDKK @FESMA 2026.','Empat belas negeri sedang menunggu.','Saya memerlukan kebenaran Ketua Pengarah untuk menghidupkan sistem.'];
-let go5mon=false;const MON='montaj.mp4',MON_FLASH=7.4,MON_LEN=12;let VL=[],vidURL=VL.length?'x':'',vi=0;
+let go5mon=false;const MON='montaj.mp4',MON_FLASH=10.2,MON_LEN=14.1;let VL=[],vidURL=VL.length?'x':'',vi=0;
 function go(n){if(n<0)n=0;if(n>5)n=5;clr();S=n;document.querySelectorAll('.st').forEach(e=>e.classList.remove('on','go'));$('s'+n).classList.add('on');$('grid').style.opacity=n>=1?1:0;heart(n===0);$('vidFull').style.display='none';try{$('vidFull').pause()}catch(e){}{const m=$('vidMon');m.onended=null;m.ontimeupdate=null;try{m.pause()}catch(e){}m.style.display='none';m.classList.remove('off')}
  hud();
  if(n===1){$('holo').classList.remove('talk');['l1','l2','l3','l4'].forEach(i=>$(i).textContent='');
