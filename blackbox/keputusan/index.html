@@ -17,17 +17,18 @@ h1{margin:6px 0 0;font-family:"Chakra Petch",sans-serif;font-size:66px;letter-sp
 .cnt{font-family:"Chakra Petch",sans-serif;font-size:30px;font-weight:700;color:var(--cyan);text-align:right}
 .cnt small{display:block;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.16em;color:var(--mu);font-weight:500}
 .grid{flex:1;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px;min-height:0}
-.t{border-radius:24px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative;overflow:hidden;
- background:linear-gradient(165deg,#22324f,#141f33);box-shadow:0 18px 30px -12px #000d,inset 0 2px 0 #ffffff26,inset 0 -4px 10px #0007;border-top:6px solid var(--gold);
+.t{--h:0;border-radius:24px;display:flex;flex-direction:column;min-width:0;position:relative;overflow:hidden;
+ background:hsl(var(--h) 45% 17%);box-shadow:0 18px 30px -12px #000d,inset 0 -4px 10px #0007;
  opacity:0;transform:translateY(16px);animation:in .5s ease forwards}
 @keyframes in{to{opacity:1;transform:none}}
-.ng{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:33px;line-height:1.02;letter-spacing:.02em;text-wrap:balance}
-.ps{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.12em;color:var(--gold);font-weight:600}
-.ln{height:2px;background:linear-gradient(90deg,#f2b63299,transparent);margin:2px 0}
-.cd{align-self:flex-start;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:21px;padding:3px 12px;border-radius:10px;background:var(--cyan);color:#06101c;box-shadow:0 3px 0 #117a8f,inset 0 1px 0 #ffffffa0}
-.tj{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:31px;line-height:1.1;text-wrap:balance}
+.top{height:156px;flex:none;padding:16px 18px 14px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;
+ background:hsl(var(--h) 78% 60%);color:#0a0e18;box-shadow:inset 0 2px 0 #ffffff70,inset 0 -3px 0 #00000030}
+.ng{height:68px;display:flex;align-items:flex-end;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:33px;line-height:1.02;letter-spacing:.02em;white-space:normal;overflow:hidden}
+.ps{height:20px;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.12em;font-weight:600;white-space:nowrap;overflow:hidden;opacity:.85}
+.bot{flex:1;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px;border-top:4px solid hsl(var(--h) 78% 72%)}
+.cd{align-self:flex-start;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:21px;padding:3px 12px;border-radius:10px;background:hsl(var(--h) 78% 60%);color:#0a0e18;box-shadow:0 3px 0 hsl(var(--h) 60% 32%),inset 0 1px 0 #ffffffa0}
+.tj{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:31px;line-height:1.1;text-wrap:balance;color:#fff}
 .tj.s{font-size:25px}
-.ng.m{font-size:28px}.ng.l{font-size:25px}
 .ft{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.1em;color:var(--mu)}
 .load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#060a12f2;z-index:5}
 .load[hidden]{display:none}
@@ -66,13 +67,20 @@ function show(r){
   const cat={};(r.catalogue||[]).forEach(x=>cat[x.title]=x);
   const rows=r.pairs.slice(0,n).map(p=>{const [ng,...ps]=String(p.team).split(' · ');return {ng:ng.trim().toUpperCase(),ps:ps.join(' · '),tj:p.subject,id:(cat[p.subject]||{}).id||''}});
   rows.sort((a,b)=>{const ia=ORDER.indexOf(a.ng),ib=ORDER.indexOf(b.ng);return (ia<0?99:ia)-(ib<0?99:ib)});
-  document.getElementById('grid').innerHTML=rows.map((x,i)=>`<div class="t" style="animation-delay:${i*90}ms"><div class="ng${x.ng.length>15?' l':x.ng.length>9?' m':''}">${esc(x.ng)}</div><div class="ps">${esc(x.ps)}</div><div class="ln"></div>${x.id?`<div class="cd">${esc(x.id)}</div>`:''}<div class="tj${x.tj.length>34?' s':''}">${esc(x.tj)}</div></div>`).join('');
+  const HUE=[0,198,58,268,130,22,218,325,85,180,42,242,160,295];
+  document.getElementById('grid').innerHTML=rows.map((x,i)=>`<div class="t" style="--h:${HUE[i%14]};animation-delay:${i*90}ms"><div class="top"><div class="ng"><span>${esc(x.ng)}</span></div><div class="ps">${esc(x.ps)}</div></div><div class="bot">${x.id?`<div class="cd">${esc(x.id)}</div>`:''}<div class="tj${x.tj.length>34?' s':''}">${esc(x.tj)}</div></div></div>`).join('');
+  muat();
   document.getElementById('cnt').innerHTML=`${n} / 14<small>${esc(r.mode==='official'?'RASMI':'SIMULASI')} · ${esc(r.drawId||'')}</small>`;
   const w=(r.witnesses||[]).filter(Boolean);
   document.getElementById('wit').textContent=(r.operator?'Operator: '+r.operator:'')+(w.length?'   ·   Saksi: '+w.join(', '):'');
   document.getElementById('fp').textContent=r.fingerprint?'Fingerprint '+String(r.fingerprint).slice(0,16)+'…':'';
   err.textContent='';document.getElementById('load').hidden=true;
 }
+function muat(){const go=()=>document.querySelectorAll('.t').forEach(t=>{
+  [['.ng',33,20],['.ps',15,10]].forEach(([q,mx,mn])=>{const e=t.querySelector(q);let f=mx;e.style.fontSize=f+'px';
+   const lebih=()=>{const sp=e.firstElementChild;return e.scrollWidth>e.clientWidth+1||(sp?sp.offsetHeight>e.clientHeight+1:false)};
+   while(lebih()&&f>mn){f--;e.style.fontSize=f+'px'}})});
+ go();if(document.fonts)document.fonts.ready.then(go)}
 function baca(file){if(!file)return;const fr=new FileReader();fr.onload=()=>{try{show(JSON.parse(fr.result))}catch(e){document.getElementById('err').textContent='Fail JSON tidak dapat dibaca.'}};fr.readAsText(file)}
 document.getElementById('f').onchange=e=>baca(e.target.files[0]);
 const d=document.getElementById('drop');
