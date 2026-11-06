@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Keputusan Cabutan Blackbox · CDKK</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Papan keputusan 16:9 untuk LED: 14 jubin negeri + tajuk ikut susunan giliran. Data dibaca dari fail JSON Control Room (tempatan), tiada data dalam kod laman ini. */
+*{box-sizing:border-box}
+:root{--bg:#060a12;--deck:#101a2c;--paper:#f4f7fc;--gold:#f2b632;--cyan:#26c6e8;--pink:#ff4f8b;--mu:#8ea3bd;color-scheme:dark}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--paper);font-family:"IBM Plex Sans",system-ui,sans-serif}
+.fit{position:relative;width:100vw;height:100vh;overflow:hidden}
+.cv{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));
+ background:radial-gradient(110% 90% at 50% 0%,#1d2c4a 0%,var(--deck) 45%,#070c16 100%);padding:40px 56px 34px;display:flex;flex-direction:column;gap:24px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--gold);padding-bottom:18px}
+.ey{font-family:"IBM Plex Mono",monospace;font-size:20px;letter-spacing:.3em;color:var(--gold);font-weight:600}
+h1{margin:6px 0 0;font-family:"Chakra Petch",sans-serif;font-size:66px;letter-spacing:.05em;line-height:1}
+.cnt{font-family:"Chakra Petch",sans-serif;font-size:30px;font-weight:700;color:var(--cyan);text-align:right}
+.cnt small{display:block;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.16em;color:var(--mu);font-weight:500}
+.grid{flex:1;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px;min-height:0}
+.t{border-radius:24px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative;overflow:hidden;
+ background:linear-gradient(165deg,#22324f,#141f33);box-shadow:0 18px 30px -12px #000d,inset 0 2px 0 #ffffff26,inset 0 -4px 10px #0007;border-top:6px solid var(--gold);
+ opacity:0;transform:translateY(16px);animation:in .5s ease forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.ng{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:33px;line-height:1.02;letter-spacing:.02em;text-wrap:balance}
+.ps{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.12em;color:var(--gold);font-weight:600}
+.ln{height:2px;background:linear-gradient(90deg,#f2b63299,transparent);margin:2px 0}
+.cd{align-self:flex-start;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:21px;padding:3px 12px;border-radius:10px;background:var(--cyan);color:#06101c;box-shadow:0 3px 0 #117a8f,inset 0 1px 0 #ffffffa0}
+.tj{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:31px;line-height:1.1;text-wrap:balance}
+.tj.s{font-size:25px}
+.ng.m{font-size:28px}.ng.l{font-size:25px}
+.ft{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.1em;color:var(--mu)}
+.load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#060a12f2;z-index:5}
+.load[hidden]{display:none}
+.box{width:min(760px,92vw);border:2px dashed #3b5274;border-radius:22px;padding:36px;text-align:center;display:flex;flex-direction:column;gap:16px;background:#0e1626}
+.box h2{margin:0;font-family:"Chakra Petch",sans-serif;font-size:30px;letter-spacing:.06em}
+.box p{margin:0;color:var(--mu);line-height:1.5}
+.box label{align-self:center;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:20px;letter-spacing:.1em;padding:14px 28px;border-radius:14px;cursor:pointer;background:linear-gradient(180deg,#ffd77a,var(--gold));color:#14110a;box-shadow:0 5px 0 #8a6508}
+.box label:focus-within{outline:3px solid #fff}
+.err{color:#ff9db8;font-weight:600;min-height:1.4em}
+.hint{position:fixed;right:12px;bottom:10px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:#5d6f8a;z-index:4}
+@media (prefers-reduced-motion:reduce){.t{animation:none;opacity:1;transform:none}}
+</style></head><body>
+<div class="fit"><div class="cv" id="cv">
+ <div class="hd"><div><div class="ey">CDKK @ FESMA 2026 · BLACKBOX DIGITAL DRAW</div><h1>KEPUTUSAN CABUTAN 14 NEGERI</h1></div>
+  <div class="cnt" id="cnt">-- / 14<small id="did">&nbsp;</small></div></div>
+ <div class="grid" id="grid"></div>
+ <div class="ft"><span id="wit">&nbsp;</span><span id="fp">&nbsp;</span></div>
+</div></div>
+<div class="load" id="load"><div class="box" id="drop">
+ <h2>MUAT FAIL JSON CABUTAN</h2>
+ <p>Selepas 14 / 14 didedahkan, tekan <b>Export JSON</b> di Control Room, kemudian pilih fail <b>CDKK_RASMI-….json</b> dari folder Downloads. Boleh juga tarik fail ke kotak ini.</p>
+ <label>PILIH FAIL JSON<input type="file" id="f" accept=".json,application/json" hidden></label>
+ <div class="err" id="err"></div>
+</div></div>
+<div class="hint">L: tukar fail · F: skrin penuh</div>
+<script>
+function fit(){document.getElementById('cv').style.setProperty('--s',Math.min(innerWidth/1920,innerHeight/1080))}
+addEventListener('resize',fit);fit();
+const ORDER=['KELANTAN','PAHANG','PERLIS','MELAKA','WILAYAH PERSEKUTUAN','PERAK','SABAH','TERENGGANU','KEDAH','SELANGOR','NEGERI SEMBILAN','PULAU PINANG','SARAWAK','JOHOR'];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function show(r){
+  const err=document.getElementById('err');
+  if(!r||!Array.isArray(r.pairs)||!r.pairs.length) return err.textContent='Fail ini bukan rekod cabutan Control Room.';
+  const n=Math.min(Number(r.revealed)||0,r.pairs.length);
+  if(n<14) return err.textContent='Rekod ini baru '+n+' / 14 didedahkan. Export JSON semula selepas 14 / 14 supaya padanan yang belum didedahkan tidak terpapar.';
+  const cat={};(r.catalogue||[]).forEach(x=>cat[x.title]=x);
+  const rows=r.pairs.slice(0,n).map(p=>{const [ng,...ps]=String(p.team).split(' · ');return {ng:ng.trim().toUpperCase(),ps:ps.join(' · '),tj:p.subject,id:(cat[p.subject]||{}).id||''}});
+  rows.sort((a,b)=>{const ia=ORDER.indexOf(a.ng),ib=ORDER.indexOf(b.ng);return (ia<0?99:ia)-(ib<0?99:ib)});
+  document.getElementById('grid').innerHTML=rows.map((x,i)=>`<div class="t" style="animation-delay:${i*90}ms"><div class="ng${x.ng.length>15?' l':x.ng.length>9?' m':''}">${esc(x.ng)}</div><div class="ps">${esc(x.ps)}</div><div class="ln"></div>${x.id?`<div class="cd">${esc(x.id)}</div>`:''}<div class="tj${x.tj.length>34?' s':''}">${esc(x.tj)}</div></div>`).join('');
+  document.getElementById('cnt').innerHTML=`${n} / 14<small>${esc(r.mode==='official'?'RASMI':'SIMULASI')} · ${esc(r.drawId||'')}</small>`;
+  const w=(r.witnesses||[]).filter(Boolean);
+  document.getElementById('wit').textContent=(r.operator?'Operator: '+r.operator:'')+(w.length?'   ·   Saksi: '+w.join(', '):'');
+  document.getElementById('fp').textContent=r.fingerprint?'Fingerprint '+String(r.fingerprint).slice(0,16)+'…':'';
+  err.textContent='';document.getElementById('load').hidden=true;
+}
+function baca(file){if(!file)return;const fr=new FileReader();fr.onload=()=>{try{show(JSON.parse(fr.result))}catch(e){document.getElementById('err').textContent='Fail JSON tidak dapat dibaca.'}};fr.readAsText(file)}
+document.getElementById('f').onchange=e=>baca(e.target.files[0]);
+const d=document.getElementById('drop');
+['dragover','dragenter'].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.style.borderColor='#f2b632'}));
+d.addEventListener('dragleave',()=>d.style.borderColor='');
+d.addEventListener('drop',e=>{e.preventDefault();d.style.borderColor='';baca(e.dataTransfer.files[0])});
+addEventListener('keydown',e=>{if(e.key==='l'||e.key==='L'){document.getElementById('f').value='';document.getElementById('load').hidden=false}
+ if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(_){}}});
+</script>
+</body></html>
