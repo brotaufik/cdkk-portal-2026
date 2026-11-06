@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- CDKK Konsol Gimik (GitHub Pages, 6 Nov 2026, arahan Bro). Laman awam: tiada pautan Command Centre, tiada PIN. -->
+<html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Konsol Gimik · CDKK</title><base target="_blank">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Kanvas 16:9 (1600x900) diskala ikut lebar. Kiri: blok MacBook M5 Max (Chrome, 3 tab bernombor ikut susunan sebenar). Kanan: blok iPad (Safari). Bawah: jalur running order. Skeuomorfik, blok warna, gelap sahaja. */
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#0a0f1a; --deck:#121a2a; --paper:#f7f3ea;
+  --gold:#f2b632; --cyan:#26c6e8; --pink:#ff4f8b; --violet:#7b5cff; --green:#2fbf77; --orange:#ff7a3d; --slate:#3a4659; --sky:#5fb8ff;
+  --display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);margin:0}
+body{color:var(--paper);font-family:var(--body)}
+.outer{padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.fit{position:relative;width:100%;max-width:1600px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;border-radius:calc(28px*var(--s,1))}
+.cv{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;transform:scale(var(--s,1));
+  background:radial-gradient(120% 90% at 20% 0%,#1b2740 0%,var(--deck) 45%,#0b1220 100%);box-shadow:inset 0 2px 0 #ffffff14,inset 0 -6px 18px #0009;
+  padding:22px 28px 20px;display:flex;flex-direction:column;gap:14px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:20px;flex:none}
+.ey{font-family:var(--mono);font-size:14px;letter-spacing:.26em;color:var(--gold)}
+h1{margin:2px 0 0;font-family:var(--display);font-size:40px;letter-spacing:.05em;line-height:1}
+.clock{font-family:var(--display);font-size:38px;font-weight:700;letter-spacing:.06em;padding:8px 18px;border-radius:14px;background:linear-gradient(180deg,#0c1424,#060b14);box-shadow:inset 0 2px 6px #000c,0 1px 0 #ffffff18;color:var(--cyan);font-variant-numeric:tabular-nums}
+.main{flex:1;display:grid;grid-template-columns:1.62fr 1fr;gap:16px;min-height:0}
+.blk{border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-height:0;position:relative;
+  background:linear-gradient(170deg,#1c2840,#111a2b);box-shadow:0 14px 26px -10px #000d,inset 0 2px 0 #ffffff1c,inset 0 -3px 8px #0006}
+.bh{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dev{display:flex;align-items:center;gap:14px}
+.ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 80%,#fff),var(--c) 45%,color-mix(in srgb,var(--c) 70%,#000));box-shadow:0 6px 10px #0008,inset 0 2px 0 #ffffff66}
+.ic svg{width:30px;height:30px;stroke:#0b1220;fill:none;stroke-width:2.2}
+.dn{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:.03em;line-height:1}
+.dd{font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:#9fb0c7;margin-top:4px}
+.br{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.08em;padding:9px 18px;border-radius:14px;color:#0b1220;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c) 75%,#fff),var(--c));box-shadow:0 4px 0 color-mix(in srgb,var(--c) 50%,#000),0 8px 12px #0007,inset 0 2px 0 #ffffff80}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.t{--c:var(--slate);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:5px;color:#0b1220;min-width:0;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 82%,#fff) 0%,var(--c) 42%,color-mix(in srgb,var(--c) 78%,#000) 100%);
+  box-shadow:0 12px 20px -8px #000c,0 3px 0 color-mix(in srgb,var(--c) 55%,#000),inset 0 2px 0 #ffffff70,inset 0 -3px 6px #0003}
+.t::after{content:"";position:absolute;inset:0 0 58% 0;border-radius:20px 20px 60% 60%/20px 20px 22px 22px;background:linear-gradient(180deg,#ffffff38,#ffffff00);pointer-events:none}
+.t.dk{color:var(--paper)}
+.tn{display:flex;align-items:center;gap:10px}
+.num{font-family:var(--display);font-size:22px;font-weight:700;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#0b1220;color:#fff;box-shadow:inset 0 2px 4px #000a,0 1px 0 #ffffff50}
+.kc{font-family:var(--mono);font-size:13px;letter-spacing:.12em;font-weight:600;opacity:.85}
+.nm{font-family:var(--display);font-weight:700;font-size:25px;line-height:1.05}
+.ds{font-size:13.5px;font-weight:500;line-height:1.3;opacity:.86}
+.ky{margin-top:auto;display:flex;gap:8px;position:relative;z-index:1;flex-wrap:wrap}
+.ky a,.ky button{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.12em;padding:8px 14px;border-radius:11px;cursor:pointer;border:0;text-decoration:none;
+  background:linear-gradient(180deg,#1b2436,#0b1220);color:#fff;box-shadow:0 4px 0 #000,0 6px 10px #0007,inset 0 1px 0 #ffffff2a}
+.ky button{background:linear-gradient(180deg,#fffaf0,#e7dfcf);color:#0b1220;box-shadow:0 4px 0 #8f8676,0 6px 10px #0005,inset 0 1px 0 #fff}
+.ky a:active,.ky button:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
+.ky a:focus-visible,.ky button:focus-visible,.ck label:focus-within{outline:3px solid #fff;outline-offset:2px}
+.row2{display:grid;grid-template-columns:1.1fr 1fr;gap:12px;flex:1;min-height:0;align-items:start}
+.pan{border-radius:18px;padding:12px 14px;background:linear-gradient(180deg,#0c1424,#0a111e);box-shadow:inset 0 3px 8px #000b,0 1px 0 #ffffff14;display:flex;flex-direction:column;gap:8px;min-height:0}
+.ph{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;color:var(--c,var(--cyan));font-weight:600}
+.keys{display:grid;grid-template-columns:auto 1fr;gap:7px 12px;align-items:center;font-size:14px}
+kbd{font-family:var(--mono);font-size:13px;font-weight:600;padding:3px 8px;border-radius:7px;background:linear-gradient(180deg,#f4efe4,#d8cfbd);color:#0b1220;box-shadow:0 3px 0 #8f8676,inset 0 1px 0 #fff;white-space:nowrap}
+.ck{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.ck label{display:flex;gap:10px;align-items:center;cursor:pointer;border-radius:8px;padding:2px 4px}
+.ck input{appearance:none;width:22px;height:22px;flex:none;border-radius:7px;background:linear-gradient(180deg,#0b1220,#18233a);box-shadow:inset 0 2px 4px #000c,0 1px 0 #ffffff22;display:grid;place-items:center;cursor:pointer;margin:0}
+.ck input:checked{background:linear-gradient(180deg,#7fe6ad,var(--green));box-shadow:0 2px 0 #1b6f45,inset 0 1px 0 #ffffffa0}
+.ck input:checked::after{content:"✓";color:#06101c;font-weight:800;font-size:15px}
+.ck input:checked+span{color:#9fb0c7;text-decoration:line-through}
+.ipad{--c:var(--pink)}
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:7px;margin:0;padding:0;list-style:none;font-size:14.5px}
+.steps li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;line-height:1.3}
+.steps li::before{content:counter(s);flex:none;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:14px;background:var(--c);color:#0b1220;box-shadow:0 2px 0 color-mix(in srgb,var(--c) 50%,#000),inset 0 1px 0 #ffffff80}
+.flow{display:flex;align-items:stretch;gap:8px}
+.fs{flex:1;border-radius:14px;padding:9px 10px;text-align:center;font-size:12.5px;font-weight:600;line-height:1.25;color:#0b1220;background:linear-gradient(170deg,color-mix(in srgb,var(--c) 80%,#fff),var(--c));box-shadow:0 3px 0 color-mix(in srgb,var(--c) 50%,#000),inset 0 1px 0 #ffffff80}
+.fs b{display:block;font-family:var(--display);font-size:17px}
+.ar{align-self:center;color:#9fb0c7;font-weight:700}
+.ro{flex:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
+.r{border-radius:14px;padding:9px 11px;background:linear-gradient(180deg,#18233a,#0f1828);box-shadow:inset 0 2px 0 #ffffff14,0 6px 10px -4px #000c;border-top:4px solid var(--c,var(--cyan));display:flex;flex-direction:column;gap:3px;min-width:0}
+.rt{font-family:var(--display);font-weight:700;font-size:20px;color:var(--c,var(--cyan));font-variant-numeric:tabular-nums}
+.rd{font-size:12.5px;line-height:1.25;font-weight:500}
+.rk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#9fb0c7}
+@media (prefers-reduced-motion:reduce){.ky a,.ky button{transition:none}}
+</style>
+</head><body>
+
+<div class="outer"><div class="fit" id="fit"><div class="cv">
+ <div class="hd">
+  <div><div class="ey">CDKK @ FESMA 2026 · SABTU 7 NOV · PENTAS UTAMA · 8.00 HINGGA 8.30 PAGI</div><h1>KONSOL GIMIK · IGNITION DAN BLACKBOX</h1></div>
+  <div class="clock" id="clk">--:--:--</div>
+ </div>
+
+ <div class="main">
+  <!-- MACBOOK -->
+  <div class="blk" style="--c:var(--gold)">
+   <div class="bh">
+    <div class="dev"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg></div>
+     <div><div class="dn">MACBOOK M5 MAX</div><div class="dd">LED + PA · OPERATOR BRO / ARIQ</div></div></div>
+    <div class="br">CHROME · 1 TETINGKAP</div>
+   </div>
+   <div class="tabs">
+    <div class="t" style="--c:var(--gold)"><div class="tn"><span class="num">1</span><span class="kc">⌘ 1 · TAB 1</span></div><span class="nm">Ignition</span><span class="ds">Fail penuh di Desktop (utama). MOD LED, klik sekali untuk bunyi.</span>
+     <div class="ky"><a href="https://brotaufik.github.io/cdkk-portal-2026/ignition/m5/" target="_blank" rel="noopener">HALAMAN FAIL</a><button type="button" data-u="https://brotaufik.github.io/cdkk-portal-2026/ignition/m5/">SALIN</button></div></div>
+    <div class="t" style="--c:var(--cyan)"><div class="tn"><span class="num">2</span><span class="kc">⌘ 2 · TAB 2</span></div><span class="nm">Control Room</span><span class="ds">Remote · Sambung. 7.55 Lock &amp; Generate, Export JSON. Stage View.</span>
+     <div class="ky"><a href="https://brotaufik.github.io/cdkk-portal-2026/blackbox/" target="_blank" rel="noopener">BUKA</a><button type="button" data-u="https://brotaufik.github.io/cdkk-portal-2026/blackbox/">SALIN</button></div></div>
+    <div class="t dk" style="--c:var(--violet)"><div class="tn"><span class="num">3</span><span class="kc">⌘ 3 · TAB 3</span></div><span class="nm">Portal CDKK</span><span class="ds">PIN Admin. Konsol Admin (kod Remote). Dashboard sprint › PAPAR DI LED.</span>
+     <div class="ky"><span style="font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;background:#0b122055;border-radius:10px;padding:8px 10px;line-height:1.3">PAUTAN TIDAK DIPAPAR DI LAMAN AWAM · BUKA DARI BOOKMARK CHROME</span></div></div>
+   </div>
+   <div class="row2">
+    <div class="pan" style="--c:var(--gold)"><div class="ph">KEKUNCI</div>
+     <div class="keys">
+      <span><kbd>⌘</kbd> <kbd>N</kbd></span><span>Tetingkap Chrome baharu (susun tab 1, 2, 3)</span>
+      <span><kbd>⌘</kbd> <kbd>Ctrl</kbd> <kbd>F</kbd></span><span>Skrin penuh tetingkap (sekali sahaja)</span>
+      <span><kbd>⌘</kbd> <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></span><span>Tukar Ignition · Control Room · Portal</span>
+      <span><kbd>SPACE</kbd></span><span>Ignition babak seterusnya / Control Room spin sandaran</span>
+      <span><kbd>M</kbd> · <kbd>0</kbd>–<kbd>5</kbd></span><span>Bunyi hidup · lompat babak</span>
+      <span><kbd>Esc</kbd> ×2</span><span style="color:#ff8a8a;font-weight:600">JANGAN semasa acara</span>
+     </div></div>
+    <div class="pan" style="--c:var(--green)"><div class="ph">SEMAK 7.45 PAGI · MACBOOK</div>
+     <div class="ck" data-g="m">
+      <label><input type="checkbox" id="m1"><span>Charger, Do Not Disturb ON, sleep OFF</span></label>
+      <label><input type="checkbox" id="m2"><span>Extension Chrome dimatikan</span></label>
+      <label><input type="checkbox" id="m3"><span>Tab 1 MOD LED, bunyi hidup</span></label>
+      <label><input type="checkbox" id="m4"><span>Tab 2 Remote bersambung, iPad diterima</span></label>
+      <label><input type="checkbox" id="m5"><span>7.55 Lock &amp; Generate, JSON ke M1 Ariq</span></label>
+      <label><input type="checkbox" id="m6"><span>Tab 3 PAPAR DI LED: SPRINT 09:00</span></label>
+     </div></div>
+   </div>
+  </div>
+
+  <!-- IPAD -->
+  <div class="blk ipad">
+   <div class="bh">
+    <div class="dev"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M11 18.5h2"/></svg></div>
+     <div><div class="dn">iPAD DATUK KP</div><div class="dd">ROSTRUM · PETUGAS FAJAR</div></div></div>
+    <div class="br">SAFARI</div>
+   </div>
+   <div class="flow">
+    <div class="fs" style="--c:var(--sky)"><b>PALM</b>Datuk sentuh</div><span class="ar">›</span>
+    <div class="fs" style="--c:var(--green)"><b>GRANTED</b>+11 saat</div><span class="ar">›</span>
+    <div class="fs" style="--c:var(--pink)"><b>SPIN</b>+1 minit</div>
+   </div>
+   <div class="pan" style="--c:var(--pink)"><div class="ph">SEDIAKAN (SEKALI, TIADA PAUTAN TETAP)</div>
+    <ol class="steps">
+     <li>Portal › Konsol Admin › Remote VVIP BUTTON › <b>Salin</b> kod</li>
+     <li>Control Room › Remote › tampal › <b>Sambung</b></li>
+     <li>iPad Camera › imbas QR › kod 4 digit › <b>Terima</b></li>
+     <li>Tutup banner Google ✕ · aA › <b>Hide Toolbar</b></li>
+     <li>Tahan bucu kanan atas 2 saat: langkau ke SPIN atau tunjuk semula tapak tangan</li>
+    </ol></div>
+   <div class="pan" style="--c:var(--green)"><div class="ph">SEMAK 7.45 PAGI · iPAD</div>
+    <div class="ck" data-g="i">
+     <label><input type="checkbox" id="i1"><span>Bateri 100%, charger di rostrum</span></label>
+     <label><input type="checkbox" id="i2"><span>Do Not Disturb ON, Auto-Lock Never</span></label>
+     <label><input type="checkbox" id="i3"><span>Skrin tapak tangan dipapar (padanan 0/14)</span></label>
+     <label><input type="checkbox" id="i4"><span>Keyboard ditanggalkan</span></label>
+    </div>
+    <div style="font-size:13px;color:#ff9db8;font-weight:600">JANGAN: Putus telefon · Mula sesi baharu · Tamat sesi</div></div>
+  </div>
+ </div>
+
+ <div class="ro">
+  <div class="r" style="--c:#c9d4e5"><span class="rt">7.55</span><span class="rd">Lock &amp; Generate, Export JSON</span><span class="rk">BRO · ⌘2</span></div>
+  <div class="r" style="--c:var(--gold)"><span class="rt">8.04</span><span class="rd">Babak 1 AURORA 60 s</span><span class="rk">ARIQ · ⌘1 · SPACE</span></div>
+  <div class="r" style="--c:var(--sky)"><span class="rt">8.06</span><span class="rd">Datuk palm scan</span><span class="rk">ARIQ · SPACE SERENTAK</span></div>
+  <div class="r" style="--c:var(--green)"><span class="rt">8.07</span><span class="rd">SYSTEM ONLINE, air horn</span><span class="rk">AUTO · ±50 s</span></div>
+  <div class="r" style="--c:var(--cyan)"><span class="rt">8.07</span><span class="rd">Tukar ke Control Room sebelum SPIN muncul</span><span class="rk">BRO · ⌘2</span></div>
+  <div class="r" style="--c:var(--pink)"><span class="rt">8.08</span><span class="rd">Datuk SPIN 14 kali (±40 s setiap satu)</span><span class="rk">DATUK · iPAD</span></div>
+  <div class="r" style="--c:var(--orange)"><span class="rt">8.22</span><span class="rd">Export JSON 14/14, PDF, Excel</span><span class="rk">BRO · ⌘2</span></div>
+  <div class="r" style="--c:var(--violet)"><span class="rt">8.25</span><span class="rd">Flag-Off, kiraan ke 9.00</span><span class="rk">BRO · ⌘3</span></div>
+ </div>
+</div></div></div>
+
+<script>
+function fit(){document.documentElement.style.setProperty('--s',document.getElementById('fit').clientWidth/1600)}
+addEventListener('resize',fit);fit();
+function tick(){document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-GB',{hour12:false,timeZone:'Asia/Kuala_Lumpur'})}
+tick();setInterval(tick,1000);
+const KEY='cdkk-gimik-semak';
+let st={};try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(_){st={}}
+document.querySelectorAll('.ck input').forEach(c=>{c.checked=!!st[c.id];c.addEventListener('change',()=>{st[c.id]=c.checked;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(_){}})});
+function salinLama(t){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(x);return ok}
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-u]');if(!b)return;
+ const ok=()=>{b.textContent='DISALIN';setTimeout(()=>b.textContent='SALIN',1400)},no=()=>{b.textContent=salinLama(b.dataset.u)?'DISALIN':'GAGAL';setTimeout(()=>b.textContent='SALIN',1400)};
+ try{navigator.clipboard.writeText(b.dataset.u).then(ok,no)}catch(_){no()}});
+</script>
+
+</body></html>
