@@ -1,0 +1,69 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Countdown Sprint CDKK</title>
+<meta property="og:title" content="Countdown Sprint CDKK @FESMA 2026"><meta property="og:description" content="Baki masa sprint 480 minit, hard stop dan enam output wajib. Serahan tamat 5.00 petang, 7 November 2026."><meta property="og:image" content="https://brotaufik.github.io/cdkk-portal-2026/sprint/og.jpg"><meta property="og:type" content="website">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=IBM+Plex+Mono:wght@600&display=swap">
+<style>
+*{box-sizing:border-box}:root{color-scheme:dark}
+html,body{margin:0;min-height:100%;background:radial-gradient(110% 90% at 50% 0%,#1d2c4a 0%,#101a2c 45%,#070c16 100%);color:#f4f7fc;font-family:"IBM Plex Sans",system-ui,sans-serif}
+.w{max-width:960px;margin:0 auto;padding:22px 16px 40px}
+.ey{font-family:"IBM Plex Mono",monospace;color:#f2b632;letter-spacing:.25em;font-size:12px;font-weight:600}
+h1{margin:4px 0 0;font-family:"Chakra Petch",sans-serif;font-size:clamp(26px,6vw,44px);line-height:1;letter-spacing:.03em}
+.top{border-bottom:3px solid #f2b632;padding-bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.clk{font-family:"IBM Plex Mono",monospace;color:#26c6e8;font-size:clamp(14px,3.5vw,22px);text-align:right}.clk small{display:block;color:#8ea3bd;font-size:11px;letter-spacing:.15em}
+.hero{margin-top:18px;background:linear-gradient(165deg,#22324f,#141f33);border-radius:22px;padding:22px;border-top:6px solid var(--c,#ff4d6d);box-shadow:0 18px 30px -12px #000d,inset 0 2px 0 #ffffff26;text-align:center}
+.hero .l{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.25em;color:#8ea3bd}
+.hero .v{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:clamp(56px,16vw,120px);line-height:1;margin:6px 0;color:var(--c,#ff4d6d);font-variant-numeric:tabular-nums}
+.hero .s{font-size:clamp(14px,3.5vw,19px);color:#cfd9ea}
+.hs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.c{background:#16223a;border-radius:16px;padding:14px 16px;border-top:5px solid var(--c,#f2b632)}
+.c .l{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:#8ea3bd}.c .v{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:clamp(26px,7vw,40px);color:var(--c,#f2b632);line-height:1.1;margin-top:4px}.c .s{font-size:13px;color:#cfd9ea;margin-top:2px}
+.c.p{opacity:.55;--c:#5d6f8a}
+.bar{position:relative;height:30px;border-radius:10px;background:#0b1220;border:2px solid #2a3b5a;margin:48px 0 34px;overflow:visible}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:8px 0 0 8px;background:linear-gradient(90deg,#2563EB 0,#2563EB 48.33%,#DC2626 48.33%,#DC2626 78.33%,#B8860B 78.33%,#B8860B 90%,#EAB308 90%,#EAB308 100%);background-size:var(--w,100%) 100%}
+.tick{position:absolute;top:-8px;bottom:-8px;width:3px;background:#f2b632;border-radius:2px}.tick small{position:absolute;top:34px;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:"IBM Plex Mono",monospace;font-size:10px;color:#f2b632}
+.now{position:absolute;top:-14px;bottom:-14px;width:5px;background:#26c6e8;border-radius:3px;box-shadow:0 0 14px #26c6e8}.now span{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:#26c6e8;color:#06101c;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:12px;padding:2px 8px;border-radius:7px;white-space:nowrap}
+.ends{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:12px;color:#8ea3bd;margin-top:-22px}
+h2{font-family:"Chakra Petch",sans-serif;font-size:16px;letter-spacing:.1em;color:#f2b632;margin:28px 0 10px}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.o{background:#16223a;border-radius:12px;padding:12px 14px;border-left:5px solid #26c6e8}.o b{display:block;font-family:"Chakra Petch",sans-serif;font-size:15px}.o span{font-size:12px;color:#8ea3bd}
+.warn{margin-top:18px;background:#3a1220;border-left:6px solid #ff4d6d;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5}
+.foot{margin-top:24px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:#5d6f8a;letter-spacing:.08em;text-align:center}
+</style></head><body><div class="w">
+<div class="top"><div><div class="ey">CDKK @ FESMA 2026 · HARI 1 · 7 NOVEMBER</div><h1>COUNTDOWN SPRINT 480 MINIT</h1></div><div class="clk"><span id="jam">--:--:--</span><small>WAKTU MALAYSIA</small></div></div>
+<div class="hero" id="hero"><div class="l" id="hl">BAKI MASA</div><div class="v" id="hv">--:--:--</div><div class="s" id="hs">Sprint 9.00 pagi hingga 5.00 petang</div></div>
+<div class="hs">
+ <div class="c" id="c1"><div class="l">HARD STOP 1 · MINIT 232</div><div class="v">12.52</div><div class="s" id="s1"></div></div>
+ <div class="c" id="c2"><div class="l">HARD STOP 2 · MINIT 376</div><div class="v">3.16</div><div class="s" id="s2"></div></div>
+ <div class="c" id="c3"><div class="l">HARD STOP 3 · MINIT 432</div><div class="v">4.12</div><div class="s" id="s3"></div></div>
+ <div class="c" style="--c:#ff4d6d"><div class="l">SERAHAN TAMAT</div><div class="v">5.00</div><div class="s">Enam output wajib dalam folder Drive pasukan</div></div>
+</div>
+<div class="bar"><div class="fill" id="fill" style="width:0%"></div><div class="tick" style="left:48.33%"><small>HS1</small></div><div class="tick" style="left:78.33%"><small>HS2</small></div><div class="tick" style="left:90%"><small>HS3</small></div><div class="now" id="now" style="left:0"><span id="nowT">MINIT 0</span></div></div>
+<div class="ends"><span>09:00 MULA</span><span>17:00 TAMAT</span></div>
+<h2>ENAM OUTPUT WAJIB · FOLDER DRIVE PASUKAN</h2>
+<div class="out">
+ <div class="o"><b>01_VIDEO_MP4</b><span>video akhir, maks 5 minit, 1080p, nama NamaNegeri_NamaKumpulan_TajukRingkas.mp4</span></div>
+ <div class="o"><b>02_CANVA</b><span>PNG cover, 2 infografik, end credit</span></div>
+ <div class="o"><b>03_BORANG2_LOG_PROMPT</b><span>Borang 2 lengkap A hingga F</span></div>
+ <div class="o"><b>04_BORANG3_STORYBOARD</b><span>Borang 3 diisi</span></div>
+ <div class="o"><b>05_BORANG4_PENGESAHAN_DATA</b><span>Borang 4 ditandatangani subjek</span></div>
+ <div class="o"><b>06_CAPCUT_PROJEK</b><span>folder projek CapCut bersama aset</span></div>
+</div>
+<div class="warn">Folder <b>00_TEMPLAT_BORANG</b> ialah templat sahaja dan <b>tidak dikira</b> sebagai serahan. Borang yang diisi mesti dimuat naik ke subfolder 03_, 04_ atau 05_. Fail yang dinilai ialah versi terakhir dalam folder pada 5.00 petang.</div>
+<div class="foot">MASA IKUT JAM PERANTI ANDA (UTC+8) · CDKK COMMAND CENTRE</div>
+</div>
+<script>
+const MULA=Date.UTC(2026,10,7,1,0,0),TAMAT=Date.UTC(2026,10,7,9,0,0),HS=[232,376,432],HSJ=['12.52 tengah hari','3.16 petang','4.12 petang'];
+const pad=n=>String(n).padStart(2,'0');const hms=ms=>{ms=Math.max(0,ms);const s=Math.floor(ms/1000);return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)};
+const jm=ms=>{const m=Math.round(ms/60000);return m>=60?Math.floor(m/60)+' jam '+(m%60)+' minit':m+' minit'};
+function tik(){const k=Date.now();const my=new Date(k+8*3600000);document.getElementById('jam').textContent=pad(my.getUTCHours())+':'+pad(my.getUTCMinutes())+':'+pad(my.getUTCSeconds());
+ const hero=document.getElementById('hero'),hl=document.getElementById('hl'),hv=document.getElementById('hv'),hs=document.getElementById('hs');
+ const lalu=Math.floor((k-MULA)/60000);let w=0;
+ if(k<MULA){hl.textContent='SPRINT MULA DALAM';hv.textContent=hms(MULA-k);hs.textContent='Mula 9.00 pagi, 7 November 2026';hero.style.setProperty('--c','#26c6e8')}
+ else if(k>=TAMAT){hl.textContent='SPRINT TAMAT';hv.textContent='00:00:00';hs.textContent='Serahan ditutup 5.00 petang. Sesi persembahan Fasa 1 bermula 8.00 malam.';hero.style.setProperty('--c','#16A34A');w=100}
+ else{hl.textContent='BAKI MASA';hv.textContent=hms(TAMAT-k);const ix=lalu>=HS[2]?3:lalu>=HS[1]?2:lalu>=HS[0]?1:0;hs.textContent='Minit '+lalu+' daripada 480 · '+['FASA 1','FASA 2','FASA 3','FASA AKHIR'][ix]+' · tamat 5.00 petang';
+  hero.style.setProperty('--c',(TAMAT-k)<=30*60000?'#ff4d6d':(TAMAT-k)<=60*60000?'#ffb020':'#f2b632');w=(k-MULA)/(TAMAT-MULA)*100}
+ document.getElementById('fill').style.width=w+'%';document.getElementById('fill').style.setProperty('--w',(w>0?10000/w:100)+'%');
+ const now=document.getElementById('now');now.style.left='calc('+w+'% - 2px)';now.style.display=(w>0&&w<100)?'':'none';document.getElementById('nowT').textContent='MINIT '+Math.max(0,Math.min(480,lalu));
+ HS.forEach((m,i)=>{const t=MULA+m*60000,c=document.getElementById('c'+(i+1)),s=document.getElementById('s'+(i+1));if(k>=t){c.classList.add('p');s.textContent='Sudah berlalu ('+HSJ[i]+')'}else{c.classList.remove('p');s.textContent='Lagi '+jm(t-k)+' · '+HSJ[i]}});}
+tik();setInterval(tik,1000);
+</script></body></html>
