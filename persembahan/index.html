@@ -1,0 +1,96 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Countdown Persembahan CDKK</title>
+<meta property="og:title" content="Countdown Persembahan Pasukan CDKK · 8.00 malam"><meta property="og:description" content="Sesi persembahan pasukan CDKK @FESMA 2026 bermula 8.00 malam, 7 November 2026."><meta property="og:image" content="https://brotaufik.github.io/cdkk-portal-2026/persembahan/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://brotaufik.github.io/cdkk-portal-2026/persembahan/"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#e9c46a;--gold2:#b8860b;--card:#15161c;--card2:#0b0c10;--txt:#f6f1e4;--cyan:#5ce1ff;
+  --dw:min(13vw,19vh);--dh:calc(var(--dw)*1.42);--fs:calc(var(--dh)*0.98)}
+html,body{height:100%;background:#040407;color:var(--txt);font-family:"Share Tech Mono",monospace;overflow:hidden}
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,#1b1a2e 0%,#0b0b14 55%,#040407 100%)}
+.bg:before{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent 0 40%,rgba(233,196,106,.07) 50%,transparent 60% 100%);animation:spin 28s linear infinite}
+.bg:after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stars{position:fixed;inset:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold);opacity:0;animation:tw var(--t) ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:.9;transform:scale(1.2)}}
+.wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,34px);padding:20px;text-align:center}
+.ey{letter-spacing:.45em;font-size:clamp(11px,1.5vw,18px);color:var(--gold);text-transform:uppercase}
+.ey:before,.ey:after{content:"";display:inline-block;width:clamp(30px,6vw,90px);height:1px;background:linear-gradient(90deg,transparent,var(--gold));vertical-align:middle;margin:0 16px}
+.ey:after{background:linear-gradient(90deg,var(--gold),transparent)}
+h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(34px,6.4vw,92px);letter-spacing:.08em;line-height:1;background:linear-gradient(180deg,#fff8e6 0%,var(--gold) 55%,#8a6508 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 24px rgba(233,196,106,.25))}
+h1 small{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(16px,2.2vw,30px);letter-spacing:.12em;color:#cfc6ad;-webkit-text-fill-color:#cfc6ad;filter:none;margin-top:8px;text-transform:none}
+.clock{display:flex;align-items:center;gap:calc(var(--dw)*.18);perspective:1400px}
+.grp{display:flex;flex-direction:column;align-items:center;gap:12px}
+.grp .lbl{letter-spacing:.4em;font-size:clamp(10px,1.1vw,15px);color:#9a9381;text-transform:uppercase;padding-left:.4em}
+.digits{display:flex;gap:calc(var(--dw)*.09)}
+.sep{font-family:"Bebas Neue",sans-serif;font-size:var(--fs);color:var(--gold);line-height:var(--dh);margin-bottom:34px;animation:blink 1s steps(1) infinite;text-shadow:0 0 18px rgba(233,196,106,.6)}
+@keyframes blink{50%{opacity:.3}}
+/* FLIP CARD */
+.flip{position:relative;width:var(--dw);height:var(--dh);font-family:"Bebas Neue",sans-serif;font-size:var(--fs);line-height:var(--dh);border-radius:calc(var(--dw)*.1);box-shadow:0 18px 40px -10px #000,0 2px 0 #2a2b35 inset,0 -1px 0 #000 inset;background:var(--card)}
+.flip .h{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:linear-gradient(180deg,#1d1e26,#15161c);text-align:center;color:var(--txt);backface-visibility:hidden}
+.flip .h span{position:absolute;left:0;right:0;height:var(--dh);line-height:var(--dh);text-shadow:0 2px 0 #000}
+.flip .top{top:0;border-radius:calc(var(--dw)*.1) calc(var(--dw)*.1) 0 0;transform-origin:bottom}
+.flip .top span{top:0}
+.flip .bot{bottom:0;border-radius:0 0 calc(var(--dw)*.1) calc(var(--dw)*.1);transform-origin:top;background:linear-gradient(180deg,#101117,#0b0c10)}
+.flip .bot span{bottom:0}
+.flip:after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#000;box-shadow:0 1px 0 rgba(255,255,255,.06);z-index:5}
+.flip:before{content:"";position:absolute;top:50%;left:-3px;right:-3px;height:10px;margin-top:-5px;z-index:6;background:radial-gradient(circle at 3px 50%,#06070a 3px,transparent 3.5px) left/8px 100% no-repeat,radial-gradient(circle at calc(100% - 3px) 50%,#06070a 3px,transparent 3.5px) right/8px 100% no-repeat}
+.flip .ft{z-index:3;animation:ft .45s cubic-bezier(.35,0,.6,1) forwards}
+.flip .fb{z-index:4;transform:rotateX(90deg);animation:fb .45s cubic-bezier(.4,0,.65,1) forwards}
+@keyframes ft{0%{transform:rotateX(0)}100%{transform:rotateX(-90deg)}}
+@keyframes fb{0%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+.flip .ft:after,.flip .fb:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);animation:sh .45s linear forwards}
+@keyframes sh{0%{background:rgba(0,0,0,0)}60%{background:rgba(0,0,0,.35)}100%{background:rgba(0,0,0,0)}}
+.foot{letter-spacing:.3em;font-size:clamp(10px,1.2vw,15px);color:#9a9381;text-transform:uppercase}
+.foot b{color:var(--cyan);font-weight:400}
+.now{position:fixed;top:18px;right:22px;z-index:3;letter-spacing:.25em;font-size:clamp(11px,1.3vw,16px);color:#7f7866}
+.now b{color:var(--gold);font-weight:400}
+.hint{position:fixed;bottom:14px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.3em;color:#4d4838}
+.done h1{font-size:clamp(44px,9vw,150px)}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+@media(max-width:640px){:root{--dw:12.6vw;--dh:calc(var(--dw)*1.42)}.wrap{padding:12px 6px}.clock{gap:1.4vw}.digits{gap:1vw}.sep{margin-bottom:28px}.ey:before,.ey:after{display:none}.grp .lbl{letter-spacing:.25em}}
+</style></head><body><div class="bg"></div><div class="stars" id="stars"></div><canvas id="cv"></canvas>
+<div class="now">WAKTU MALAYSIA <b id="jam">--:--:--</b></div>
+<div class="wrap" id="wrap">
+ <div class="ey">CDKK @ FESMA 2026 · 7 November</div>
+ <h1 id="h1">PERSEMBAHAN PASUKAN<small id="sub">Fasa 1 bermula 8.00 malam</small></h1>
+ <div class="clock" id="clock">
+  <div class="grp"><div class="digits"><div class="flip" id="d0"></div><div class="flip" id="d1"></div></div><div class="lbl">Jam</div></div>
+  <div class="sep">:</div>
+  <div class="grp"><div class="digits"><div class="flip" id="d2"></div><div class="flip" id="d3"></div></div><div class="lbl">Minit</div></div>
+  <div class="sep">:</div>
+  <div class="grp"><div class="digits"><div class="flip" id="d4"></div><div class="flip" id="d5"></div></div><div class="lbl">Saat</div></div>
+ </div>
+ <div class="foot" id="foot">Baki masa ke sesi persembahan · <b>13 pasukan</b> · 20 minit setiap pasukan</div>
+</div>
+<div class="hint">F · SKRIN PENUH</div>
+<script>
+const SASAR=Date.UTC(2026,10,7,12,0,0); // 20:00 MYT
+const pad=n=>String(n).padStart(2,'0');
+// stars
+const st=document.getElementById('stars');for(let i=0;i<70;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.setProperty('--t',(2+Math.random()*5)+'s');s.style.animationDelay=(Math.random()*5)+'s';st.appendChild(s)}
+// flip cards
+const cards=[];for(let i=0;i<6;i++){const el=document.getElementById('d'+i);el.innerHTML='<div class="h top"><span>0</span></div><div class="h bot"><span>0</span></div>';cards.push({el,v:'0'})}
+function setCard(c,v){if(c.v===v)return;const old=c.v;c.v=v;const el=c.el;
+ el.querySelectorAll('.ft,.fb').forEach(x=>x.remove());
+ const top=el.querySelector('.top'),bot=el.querySelector('.bot');
+ top.querySelector('span').textContent=v; // new value behind
+ const ft=document.createElement('div');ft.className='h top ft';ft.innerHTML='<span>'+old+'</span>';
+ const fb=document.createElement('div');fb.className='h bot fb';fb.innerHTML='<span>'+v+'</span>';
+ el.appendChild(ft);el.appendChild(fb);
+ fb.addEventListener('animationend',()=>{bot.querySelector('span').textContent=v;ft.remove();fb.remove()},{once:true});
+ bot.querySelector('span').textContent=old;}
+function show(str){[...str].forEach((ch,i)=>setCard(cards[i],ch))}
+let done=false;
+function tik(){const k=Date.now();const my=new Date(k+8*3600000);document.getElementById('jam').textContent=pad(my.getUTCHours())+':'+pad(my.getUTCMinutes())+':'+pad(my.getUTCSeconds());
+ let d=SASAR-k;
+ if(d<=0){show('000000');if(!done){done=true;document.getElementById('wrap').classList.add('done');document.getElementById('h1').innerHTML='SESI PERSEMBAHAN BERMULA<small>Selamat maju jaya kepada semua pasukan</small>';document.getElementById('foot').innerHTML='Fasa 1 · 8.00 malam · <b>13 pasukan</b> · 20 minit setiap pasukan';burst()}return}
+ const s=Math.floor(d/1000);show(pad(Math.floor(s/3600))+pad(Math.floor(s%3600/60))+pad(s%60));}
+// particles
+const cv=document.getElementById('cv'),cx=cv.getContext('2d');let P=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}addEventListener('resize',rs);rs();
+function burst(){for(let i=0;i<260;i++)P.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-2,g:.22,l:1,c:Math.random()<.5?'#e9c46a':(Math.random()<.5?'#fff3c4':'#5ce1ff'),r:2+Math.random()*4});loop()}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);P=P.filter(p=>p.l>0);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.99;p.l-=.008;cx.globalAlpha=Math.max(0,p.l);cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()});cx.globalAlpha=1;if(P.length)requestAnimationFrame(loop)}
+addEventListener('keydown',e=>{if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+tik();setInterval(tik,1000);
+</script></body></html>
